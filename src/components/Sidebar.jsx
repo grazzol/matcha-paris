@@ -74,10 +74,12 @@ export default function Sidebar({ spots, onSelect, selected }) {
         }
     }, [selected])
 
-    const filtered = spots.filter(s =>
-        (type === 'Tous' || s.type === type) &&
-        s.name.toLowerCase().includes(search.toLowerCase())
-    )
+    const filtered = spots
+        .filter(s =>
+            (type === 'Tous' || s.type === type) &&
+            s.name.toLowerCase().includes(search.toLowerCase())
+        )
+        .sort((a, b) => a.name.localeCompare(b.name, 'fr'))
 
     const handleItemClick = (spot) => {
         onSelect(spot)
