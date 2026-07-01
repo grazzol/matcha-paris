@@ -8,7 +8,6 @@ export default function Home() {
     return (
         <div className="home">
 
-            {/* Fond animé — cercles de vapeur */}
             <div className="home-bg">
                 <div className="bubble b1" />
                 <div className="bubble b2" />
@@ -16,7 +15,6 @@ export default function Home() {
             </div>
 
             <main className="home-content">
-
                 <div className="home-eyebrow">Paris · Matcha Guide</div>
 
                 <h1 className="home-title">
@@ -57,11 +55,11 @@ export default function Home() {
                         <span className="stat-l">arrondissements</span>
                     </div>
                 </div>
-
             </main>
 
             <footer className="home-footer">
-                Fait avec 🍵 à Paris
+                <span>Fait avec 🍵 à Paris</span>
+                <span className="home-copyright">© {new Date().getFullYear()} Matcha Paris — Tous droits réservés</span>
             </footer>
 
         </div>

@@ -30,7 +30,7 @@ export const spots = [
     },
     {
         id: 3,
-        name: 'Shodai Matcha, 75002',
+        name: 'Shodai Matcha',
         address: '19 Rue Saint-Augustin, 75002 Paris',
         lat: 48.86884,
         lng: 2.3363,

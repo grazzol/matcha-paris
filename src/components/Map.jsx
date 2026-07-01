@@ -1,10 +1,10 @@
 // src/components/Map.jsx
 import { useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import MarkerClusterGroup from 'react-leaflet-cluster'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
-// Fix bug Vite : icônes Leaflet manquantes
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
     iconUrl: new URL('leaflet/dist/images/marker-icon.png', import.meta.url).href,
@@ -12,64 +12,120 @@ L.Icon.Default.mergeOptions({
     shadowUrl: new URL('leaflet/dist/images/marker-shadow.png', import.meta.url).href,
 })
 
-// Icône personnalisée — point vert matcha
-const matchaIcon = (name) => L.divIcon({
+// Icône cluster personnalisée — bulle vert matcha
+const createClusterIcon = (cluster) => {
+    const count = cluster.getChildCount()
+    return L.divIcon({
+        className: '',
+        html: `<div style="
+            width: 36px;
+            height: 36px;
+            background: #2c4a32;
+            border: 2.5px solid #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(44,74,50,0.35);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #f5f2ec;
+        ">${count}</div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
+    })
+}
+
+const matchaIcon = (name, rating) => L.divIcon({
     className: '',
     html: `
-        <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
             <div style="
-                width: 10px; height: 10px;
+                width: 8px; height: 8px;
                 background: #2c4a32;
-                border: 2px solid #ffffff;
+                border: 2px solid #fff;
                 border-radius: 50%;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+                box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+                flex-shrink: 0;
             "></div>
-            <span style="
-                font-family: 'DM Sans', sans-serif;
-                font-size: 10px;
-                font-weight: 600;
-                color: #1a2e1e;
+            <div style="
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                background: rgba(255,255,255,0.92);
+                border: 1px solid rgba(44,74,50,0.15);
+                border-radius: 5px;
+                padding: 2px 7px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+                backdrop-filter: blur(4px);
                 white-space: nowrap;
-                background: rgba(255,255,255,0.75);
-                padding: 1px 5px;
-                border-radius: 4px;
-                backdrop-filter: blur(2px);
                 pointer-events: none;
-                letter-spacing: 0.01em;
-            ">${name}</span>
+            ">
+                <span style="
+                    font-family: 'DM Sans', sans-serif;
+                    font-size: 10px;
+                    font-weight: 500;
+                    color: #1a2e1e;
+                ">${name}</span>
+                ${rating ? `
+                <span style="width:1px;height:10px;background:rgba(44,74,50,0.2);display:inline-block;"></span>
+                <span style="
+                    font-family: 'DM Sans', sans-serif;
+                    font-size: 10px;
+                    font-weight: 600;
+                    color: #4a7c59;
+                ">★ ${rating}</span>` : ''}
+            </div>
         </div>`,
-    iconSize: [120, 32],
-    iconAnchor: [60, 10],
-    popupAnchor: [0, -14],
+    iconSize: [140, 38],
+    iconAnchor: [70, 8],
+    popupAnchor: [0, -20],
 })
 
-const matchaIconActive = (name) => L.divIcon({
+const matchaIconActive = (name, rating) => L.divIcon({
     className: '',
     html: `
-        <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
             <div style="
-                width: 14px; height: 14px;
+                width: 10px; height: 10px;
                 background: #4a7c59;
-                border: 2px solid #ffffff;
+                border: 2px solid #fff;
                 border-radius: 50%;
-                box-shadow: 0 2px 12px rgba(74,124,89,0.6);
+                box-shadow: 0 2px 8px rgba(74,124,89,0.5);
+                flex-shrink: 0;
             "></div>
-            <span style="
-                font-family: 'DM Sans', sans-serif;
-                font-size: 10px;
-                font-weight: 600;
-                color: #ffffff;
-                white-space: nowrap;
+            <div style="
+                display: flex;
+                align-items: center;
+                gap: 4px;
                 background: #2c4a32;
-                padding: 1px 5px;
-                border-radius: 4px;
+                border: 1px solid rgba(255,255,255,0.15);
+                border-radius: 5px;
+                padding: 2px 7px;
+                box-shadow: 0 2px 8px rgba(44,74,50,0.3);
+                white-space: nowrap;
                 pointer-events: none;
-                letter-spacing: 0.01em;
-            ">${name}</span>
+            ">
+                <span style="
+                    font-family: 'DM Sans', sans-serif;
+                    font-size: 10px;
+                    font-weight: 600;
+                    color: #f5f2ec;
+                ">${name}</span>
+                ${rating ? `
+                <span style="width:1px;height:10px;background:rgba(255,255,255,0.2);display:inline-block;"></span>
+                <span style="
+                    font-family: 'DM Sans', sans-serif;
+                    font-size: 10px;
+                    font-weight: 600;
+                    color: #c8dbc2;
+                ">★ ${rating}</span>` : ''}
+            </div>
         </div>`,
-    iconSize: [120, 32],
-    iconAnchor: [60, 10],
-    popupAnchor: [0, -14],
+    iconSize: [140, 38],
+    iconAnchor: [70, 8],
+    popupAnchor: [0, -20],
 })
 
 function FlyToSelected({ selected }) {
@@ -88,34 +144,43 @@ export default function Map({ spots, selected, onSelect }) {
             style={{ flex: 1, width: '100%' }}
             zoomControl={true}
         >
-            {/*
-        Tuiles CartoDB Positron — carte très claire et minimaliste,
-        parfaite base pour le filtre CSS matcha ci-dessous.
-        Le filtre hue-rotate + sepia donne une teinte off-white chaude
-        cohérente avec la palette.
-      */}
             <TileLayer
-                url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>'
+                url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+                attribution='© <a href="https://stadiamaps.com/">Stadia Maps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 className="map-tiles-matcha"
             />
 
             <FlyToSelected selected={selected} />
 
-            {spots.map(spot => (
-                <Marker
-                    key={spot.id}
-                    position={[spot.lat, spot.lng]}
-                    icon={selected?.id === spot.id ? matchaIconActive(spot.name) : matchaIcon(spot.name)}
-                    eventHandlers={{ click: () => onSelect(spot) }}
-                >
-                    <Popup>
-                        <strong>{spot.name}</strong>
-                        <span>{spot.type}{spot.rating ? ` — ${spot.rating}★` : ''}</span>
-                        <small>{spot.address}</small>
-                    </Popup>
-                </Marker>
-            ))}
+            <MarkerClusterGroup
+                iconCreateFunction={createClusterIcon}
+                maxClusterRadius={50}
+                showCoverageOnHover={false}
+                zoomToBoundsOnClick={true}
+                disableClusteringAtZoom={15}
+            >
+                {spots.filter(s => s.lat && s.lng).map(spot => (
+                    <Marker
+                        key={spot.id}
+                        position={[spot.lat, spot.lng]}
+                        icon={selected?.id === spot.id
+                            ? matchaIconActive(spot.name, spot.rating)
+                            : matchaIcon(spot.name, spot.rating)
+                        }
+                        eventHandlers={{ click: () => onSelect(spot) }}
+                    >
+                        <Popup>
+                            <strong>{spot.name}</strong>
+                            <span>
+                                {spot.type}
+                                {spot.rating ? ` — ★ ${spot.rating}` : ''}
+                                {spot.userRatingCount ? ` (${spot.userRatingCount} avis)` : ''}
+                            </span>
+                            <small>{spot.address}</small>
+                        </Popup>
+                    </Marker>
+                ))}
+            </MarkerClusterGroup>
         </MapContainer>
     )
 }

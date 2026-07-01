@@ -3,6 +3,21 @@ import { useState, useEffect, useRef } from 'react'
 
 const TYPES = ['Tous', 'Café', 'Salon de thé', 'Épicerie']
 
+function getArrondissement(address) {
+    const match = address.match(/75(\d{3})|92200|93400/)
+    if (!match) return null
+    const cp = match[0]
+    if (cp.startsWith('75')) {
+        const arr = parseInt(cp.slice(2))
+        if (arr === 75001 || arr === 1) return '1er arr.'
+        const num = parseInt(cp.slice(3))
+        return `${num}e arr.`
+    }
+    if (cp === '92200') return 'Neuilly-sur-Seine'
+    if (cp === '93400') return 'Saint-Ouen'
+    return null
+}
+
 function SpotDetail({ spot, onClose }) {
     return (
         <div className="spot-detail">
@@ -10,6 +25,13 @@ function SpotDetail({ spot, onClose }) {
             <div className="spot-detail-type">{spot.type}</div>
             <h2 className="spot-detail-name">{spot.name}</h2>
             <p className="spot-detail-address">{spot.address}</p>
+
+            {spot.rating && (
+                <div className="spot-detail-rating">
+                    {'★'.repeat(Math.round(spot.rating))}{'☆'.repeat(5 - Math.round(spot.rating))}
+                    <span> {spot.rating} {spot.userRatingCount ? `(${spot.userRatingCount} avis)` : ''}</span>
+                </div>
+            )}
 
             {spot.description && (
                 <p className="spot-detail-desc">{spot.description}</p>
@@ -56,19 +78,16 @@ function SpotDetail({ spot, onClose }) {
     )
 }
 
-export default function Sidebar({ spots, onSelect, selected }) {
+export default function Sidebar({ spots, onSelect, selected, className }) {
     const [search, setSearch] = useState('')
     const [type, setType] = useState('Tous')
-    // expanded est maintenant dérivé de selected — ils sont toujours synchronisés
     const [expandedId, setExpandedId] = useState(null)
     const listRef = useRef(null)
 
-    // Quand selected change (ex: clic sur la carte) → ouvrir le panneau
-    // et scroller jusqu'au spot dans la liste
+    // Sync avec la carte — clic sur un marqueur ouvre le panneau et scroll
     useEffect(() => {
         if (selected) {
             setExpandedId(selected.id)
-            // Scroll vers le spot sélectionné dans la liste
             const el = listRef.current?.querySelector(`[data-id="${selected.id}"]`)
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
         }
@@ -83,7 +102,6 @@ export default function Sidebar({ spots, onSelect, selected }) {
 
     const handleItemClick = (spot) => {
         onSelect(spot)
-        // Toggle : si déjà ouvert, ferme ; sinon ouvre
         setExpandedId(expandedId === spot.id ? null : spot.id)
     }
 
@@ -93,7 +111,7 @@ export default function Sidebar({ spots, onSelect, selected }) {
     }
 
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${className || ''}`}>
             <div className="sidebar-header">
                 <h1>Matcha <em>Paris</em></h1>
                 <p>{filtered.length} spots</p>
@@ -140,7 +158,12 @@ export default function Sidebar({ spots, onSelect, selected }) {
                             </div>
                             <div className="spot-meta">
                                 <span>{spot.type}</span>
-                                {spot.rating && <span>{spot.rating}★</span>}
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    {spot.rating && (
+                                        <span className="spot-rating-badge">★ {spot.rating}</span>
+                                    )}
+                                    <span className="spot-arr">{getArrondissement(spot.address)}</span>
+                                </div>
                             </div>
                         </div>
 

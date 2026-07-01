@@ -1,11 +1,13 @@
 /* src/pages/Home.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
 .home {
-    min-height: 100vh;
+    min-height: 100dvh;
     background: #1a2e1e;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     overflow: hidden;
@@ -61,7 +63,7 @@
     }
 }
 
-/* --- Contenu --- */
+/* --- Contenu central --- */
 .home-content {
     position: relative;
     z-index: 1;
@@ -70,7 +72,8 @@
     align-items: center;
     text-align: center;
     padding: 2rem;
-    gap: 0;
+    flex: 1;
+    justify-content: center;
 }
 
 .home-eyebrow {
@@ -177,10 +180,35 @@
 
 /* --- Footer --- */
 .home-footer {
-    position: absolute;
-    bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(74, 124, 89, 0.15);
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
     color: #3a5c40;
     letter-spacing: 0.05em;
+}
+
+.home-copyright {
+    color: #2e4a32;
+    font-size: 10px;
+}
+
+/* --- Responsive mobile --- */
+@media (max-width: 480px) {
+    .home-stats {
+        gap: 1.25rem;
+    }
+
+    .home-footer {
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+        padding: 1rem;
+    }
 }
