@@ -24,7 +24,7 @@ export default function Home() {
                 </h1>
 
                 <p className="home-subtitle">
-                    120+ adresses curatées — cafés, salons de thé, épiceries.
+                    120+ adresses curatées — cafés, salons de thé.
                     <br />Filtre, explore, découvre.
                 </p>
 
