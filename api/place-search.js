@@ -1,8 +1,20 @@
 // api/place-search.js
-// Fonction serverless Vercel — recherche un place_id via Text Search
-// Usage : /api/place-search?query=Café Kitsuné 51 Galerie de Montpensier Paris
+const ALLOWED_ORIGINS = [
+    'https://matcha-paris.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:4000',
+]
+
+function isAllowed(req) {
+    const origin = req.headers.origin || req.headers.referer || ''
+    return ALLOWED_ORIGINS.some(o => origin.startsWith(o))
+}
 
 export default async function handler(req, res) {
+    if (!isAllowed(req)) {
+        return res.status(403).json({ error: 'Accès refusé' })
+    }
+
     const { query } = req.query
 
     if (!query) {
@@ -12,7 +24,7 @@ export default async function handler(req, res) {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY
 
     if (!apiKey) {
-        return res.status(500).json({ error: 'Clé API non configurée côté serveur' })
+        return res.status(500).json({ error: 'Clé API non configurée' })
     }
 
     try {
@@ -38,8 +50,9 @@ export default async function handler(req, res) {
         }
 
         const data = await response.json()
+        res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate')
         res.status(200).json(data)
     } catch (error) {
-        res.status(500).json({ error: 'Erreur lors de la requête Google Places', details: error.message })
+        res.status(500).json({ error: 'Erreur lors de la requête', details: error.message })
     }
 }
