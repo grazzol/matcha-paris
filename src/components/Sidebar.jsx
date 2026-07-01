@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react'
 
 const TYPES = ['Tous', 'Café', 'Salon de thé']
 
-// Extrait le code postal depuis l'adresse
 function getCP(address) {
     const match = address.match(/7[45]\d{3}|92200|93400/)
     return match ? match[0] : null
@@ -21,7 +20,6 @@ function getArrondissement(address) {
     return null
 }
 
-// Génère la liste des arrondissements présents dans les spots
 function getAvailableArrondissements(spots) {
     const set = new Set()
     spots.forEach(s => {
@@ -29,7 +27,6 @@ function getAvailableArrondissements(spots) {
         if (cp) set.add(cp)
     })
     return Array.from(set).sort((a, b) => {
-        // Paris en premier, banlieue en dernier
         if (a.startsWith('75') && b.startsWith('75')) return parseInt(a.slice(3)) - parseInt(b.slice(3))
         if (a.startsWith('75')) return -1
         if (b.startsWith('75')) return 1
@@ -47,13 +44,55 @@ function cpToLabel(cp) {
     return cp
 }
 
-function SpotDetail({ spot, onClose }) {
+// Calcule la distance en mètres entre deux points (formule Haversine)
+function getDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371000
+    const dLat = (lat2 - lat1) * Math.PI / 180
+    const dLng = (lng2 - lng1) * Math.PI / 180
+    const a = Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLng / 2) ** 2
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
+
+function formatDistance(meters) {
+    if (meters < 1000) return `${Math.round(meters)}m`
+    return `${(meters / 1000).toFixed(1)}km`
+}
+
+function HeartIcon({ filled }) {
+    return (
+        <svg width="15" height="15" viewBox="0 0 24 24"
+            fill={filled ? '#e85d6a' : 'none'}
+            stroke={filled ? '#e85d6a' : 'currentColor'}
+            strokeWidth="2"
+        >
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+    )
+}
+
+function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
     return (
         <div className="spot-detail">
             <button className="spot-detail-close" onClick={onClose}>✕</button>
             <div className="spot-detail-type">{spot.type}</div>
-            <h2 className="spot-detail-name">{spot.name}</h2>
-            <p className="spot-detail-address">{spot.address}</p>
+            <div className="spot-detail-name-row">
+                <h2 className="spot-detail-name">{spot.name}</h2>
+                <button
+                    className="fav-btn-detail"
+                    onClick={e => { e.stopPropagation(); onToggleFav(spot.id) }}
+                    title={isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                >
+                    <HeartIcon filled={isFav} />
+                </button>
+            </div>
+            <p className="spot-detail-address">
+                {spot.address}
+                {distance != null && (
+                    <span className="spot-detail-distance"> · {formatDistance(distance)}</span>
+                )}
+            </p>
 
             {spot.rating && (
                 <div className="spot-detail-rating">
@@ -107,12 +146,14 @@ function SpotDetail({ spot, onClose }) {
     )
 }
 
-export default function Sidebar({ spots, onSelect, selected, className }) {
+export default function Sidebar({ spots, onSelect, selected, className, favIds, onToggleFav, userPos, onLocate, locating }) {
     const [search, setSearch] = useState('')
     const [type, setType] = useState('Tous')
-    const [arrFilter, setArrFilter] = useState(null) // null = tous
-    const [expandedId, setExpandedId] = useState(null)
+    const [arrFilter, setArrFilter] = useState(null)
     const [showArrFilter, setShowArrFilter] = useState(false)
+    const [expandedId, setExpandedId] = useState(null)
+    const [showFavsOnly, setShowFavsOnly] = useState(false)
+    const [diceAnim, setDiceAnim] = useState(false)
     const listRef = useRef(null)
 
     const availableArr = getAvailableArrondissements(spots)
@@ -125,14 +166,42 @@ export default function Sidebar({ spots, onSelect, selected, className }) {
         }
     }, [selected])
 
-    const filtered = spots
+    const handleRandom = () => {
+        const validSpots = spots.filter(s => s.lat && s.lng)
+        const spot = validSpots[Math.floor(Math.random() * validSpots.length)]
+        onSelect(spot)
+        setExpandedId(spot.id)
+        setDiceAnim(true)
+        setTimeout(() => setDiceAnim(false), 600)
+        setTimeout(() => {
+            const el = listRef.current?.querySelector(`[data-id="${spot.id}"]`)
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+        }, 100)
+    }
+
+    // Calcule les distances si on a la position
+    const spotsWithDistance = spots.map(s => ({
+        ...s,
+        distance: userPos && s.lat && s.lng
+            ? getDistance(userPos.lat, userPos.lng, s.lat, s.lng)
+            : null
+    }))
+
+    const filtered = spotsWithDistance
         .filter(s => {
             const matchType = type === 'Tous' || s.type === type
             const matchSearch = s.name.toLowerCase().includes(search.toLowerCase())
             const matchArr = !arrFilter || getCP(s.address) === arrFilter
-            return matchType && matchSearch && matchArr
+            const matchFav = !showFavsOnly || favIds.has(s.id)
+            return matchType && matchSearch && matchArr && matchFav
         })
-        .sort((a, b) => a.name.localeCompare(b.name, 'fr'))
+        .sort((a, b) => {
+            // Si géoloc active → tri par distance
+            if (userPos && a.distance != null && b.distance != null) {
+                return a.distance - b.distance
+            }
+            return a.name.localeCompare(b.name, 'fr')
+        })
 
     const handleItemClick = (spot) => {
         onSelect(spot)
@@ -147,12 +216,49 @@ export default function Sidebar({ spots, onSelect, selected, className }) {
     return (
         <aside className={`sidebar ${className || ''}`}>
             <div className="sidebar-header">
-                <h1>Matcha <em>Paris</em></h1>
-                <p>{filtered.length} spots</p>
+                <div className="sidebar-header-top">
+                    <h1>Matcha <em>Paris</em></h1>
+                    <div className="sidebar-header-actions">
+                        {/* Géolocalisation */}
+                        <button
+                            className={`locate-btn ${userPos ? 'active' : ''} ${locating ? 'locating' : ''}`}
+                            onClick={onLocate}
+                            title="Autour de moi"
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" strokeWidth="2">
+                                <circle cx="12" cy="12" r="3" />
+                                <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+                                <circle cx="12" cy="12" r="8" strokeOpacity="0.3" />
+                            </svg>
+                        </button>
+                        {/* Spot aléatoire */}
+                        <button
+                            className={`random-btn ${diceAnim ? 'spin' : ''}`}
+                            onClick={handleRandom}
+                            title="Spot aléatoire"
+                        >
+                            🎲
+                        </button>
+                        {/* Favoris */}
+                        <button
+                            className={`fav-filter-btn ${showFavsOnly ? 'active' : ''}`}
+                            onClick={() => setShowFavsOnly(!showFavsOnly)}
+                            title="Mes favoris"
+                        >
+                            <HeartIcon filled={showFavsOnly} />
+                            {favIds.size > 0 && <span className="fav-count">{favIds.size}</span>}
+                        </button>
+                    </div>
+                </div>
+                <p>
+                    {filtered.length} spots
+                    {showFavsOnly ? ' • favoris' : ''}
+                    {userPos ? ' • trié par distance' : ''}
+                </p>
             </div>
 
             <div className="sidebar-filters">
-                {/* Recherche */}
                 <input
                     type="text"
                     placeholder="Rechercher un spot…"
@@ -161,7 +267,6 @@ export default function Sidebar({ spots, onSelect, selected, className }) {
                     className="search-input"
                 />
 
-                {/* Filtre type */}
                 <div className="type-filters">
                     {TYPES.map(t => (
                         <button
@@ -174,28 +279,19 @@ export default function Sidebar({ spots, onSelect, selected, className }) {
                     ))}
                 </div>
 
-                {/* Filtre arrondissement */}
                 <div className="arr-filter-row">
                     <button
                         className={`filter-btn arr-toggle ${arrFilter ? 'active' : ''}`}
                         onClick={() => setShowArrFilter(!showArrFilter)}
                     >
                         {arrFilter ? `📍 ${cpToLabel(arrFilter)}` : 'Arrondissement'}
-                        <svg
-                            width="12" height="12" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" strokeWidth="2"
-                            style={{ marginLeft: 4, transform: showArrFilter ? 'rotate(180deg)' : 'none', transition: '0.18s' }}
-                        >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                            style={{ marginLeft: 4, transform: showArrFilter ? 'rotate(180deg)' : 'none', transition: '0.18s' }}>
                             <polyline points="6 9 12 15 18 9" />
                         </svg>
                     </button>
                     {arrFilter && (
-                        <button
-                            className="filter-btn arr-clear"
-                            onClick={() => { setArrFilter(null); setShowArrFilter(false) }}
-                        >
-                            ✕
-                        </button>
+                        <button className="filter-btn arr-clear" onClick={() => { setArrFilter(null); setShowArrFilter(false) }}>✕</button>
                     )}
                 </div>
 
@@ -215,6 +311,11 @@ export default function Sidebar({ spots, onSelect, selected, className }) {
             </div>
 
             <ul className="spot-list" ref={listRef}>
+                {filtered.length === 0 && (
+                    <li className="spot-empty">
+                        {showFavsOnly ? "Aucun favori pour l'instant 🍵" : 'Aucun spot trouvé'}
+                    </li>
+                )}
                 {filtered.map(spot => (
                     <li key={spot.id}>
                         <div
@@ -224,21 +325,31 @@ export default function Sidebar({ spots, onSelect, selected, className }) {
                         >
                             <div className="spot-item-row">
                                 <div className="spot-name">{spot.name}</div>
-                                <svg
-                                    className={`spot-chevron ${expandedId === spot.id ? 'open' : ''}`}
-                                    width="14" height="14" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" strokeWidth="2"
-                                >
-                                    <polyline points="6 9 12 15 18 9" />
-                                </svg>
+                                <div className="spot-item-actions">
+                                    <button
+                                        className="fav-btn"
+                                        onClick={e => { e.stopPropagation(); onToggleFav(spot.id) }}
+                                        title={favIds.has(spot.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                                    >
+                                        <HeartIcon filled={favIds.has(spot.id)} />
+                                    </button>
+                                    <svg
+                                        className={`spot-chevron ${expandedId === spot.id ? 'open' : ''}`}
+                                        width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" strokeWidth="2"
+                                    >
+                                        <polyline points="6 9 12 15 18 9" />
+                                    </svg>
+                                </div>
                             </div>
                             <div className="spot-meta">
                                 <span>{spot.type}</span>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                    {spot.rating && (
-                                        <span className="spot-rating-badge">★ {spot.rating}</span>
+                                    {spot.distance != null && (
+                                        <span className="spot-distance">{formatDistance(spot.distance)}</span>
                                     )}
-                                    <span className="spot-arr">{getArrondissement(spot.address)}</span>
+                                    {spot.rating && <span className="spot-rating-badge">★ {spot.rating}</span>}
+                                    {!userPos && <span className="spot-arr">{getArrondissement(spot.address)}</span>}
                                 </div>
                             </div>
                         </div>
@@ -247,6 +358,9 @@ export default function Sidebar({ spots, onSelect, selected, className }) {
                             <SpotDetail
                                 spot={spot}
                                 onClose={handleClose}
+                                isFav={favIds.has(spot.id)}
+                                onToggleFav={onToggleFav}
+                                distance={spot.distance}
                             />
                         )}
                     </li>
