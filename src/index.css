@@ -10,5 +10,5 @@ body,
 
 
 .map-tiles-matcha {
-  filter: sepia(8%) saturate(85%) brightness(1.01);
+  filter: sepia(8%) saturate(80%) brightness(1.01);
 }
