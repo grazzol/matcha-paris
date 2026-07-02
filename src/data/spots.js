@@ -13,6 +13,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'patisserietomo',
+        tiktok: null,
     },
     {
         id: 2,
@@ -27,6 +28,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'dearjanebakery',
+        tiktok: null,
     },
     {
         id: 3,
@@ -41,6 +43,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'shodaimatcha',
+        tiktok: null,
     },
     {
         id: 4,
@@ -55,6 +58,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'shodaimatcha',
+        tiktok: null,
     },
     {
         id: 5,
@@ -69,6 +73,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'shodaimatcha',
+        tiktok: null,
     },
     {
         id: 6,
@@ -83,6 +88,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'shodaimatcha',
+        tiktok: null,
     },
     {
         id: 7,
@@ -97,6 +103,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'shodaimatcha',
+        tiktok: null,
     },
     {
         id: 8,
@@ -111,11 +118,12 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'moonlight.cafe.paris',
+        tiktok: null,
     },
     {
         id: 9,
         name: 'Kura-ge',
-        address: '2 Square de l\'Opéra-Louis Jouvet, 75009 Paris',
+        address: "2 Square de l'Opéra-Louis Jouvet, 75009 Paris",
         lat: 48.87206,
         lng: 2.32907,
         type: 'Café',
@@ -125,6 +133,7 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: 'kurageparis',
+        tiktok: null,
     },
     {
         id: 10,
@@ -139,6 +148,7 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: 'kurageparis',
+        tiktok: null,
     },
     {
         id: 11,
@@ -153,6 +163,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'seamercoffee',
+        tiktok: null,
     },
     {
         id: 12,
@@ -167,6 +178,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'cafenuances',
+        tiktok: null,
     },
     {
         id: 13,
@@ -181,6 +193,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'cafenuances',
+        tiktok: null,
     },
     {
         id: 14,
@@ -195,6 +208,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'cafenuances',
+        tiktok: null,
     },
     {
         id: 15,
@@ -209,6 +223,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'cafenuances',
+        tiktok: null,
     },
     {
         id: 16,
@@ -223,11 +238,12 @@ export const spots = [
         tags: ['matcha latte', 'aesthetic'],
         description: '',
         instagram: 'cafekitsune',
+        tiktok: null,
     },
     {
         id: 17,
         name: 'Café Kitsuné',
-        address: '32 Avenue de l\'Opéra, 75002 Paris',
+        address: "32 Avenue de l'Opéra, 75002 Paris",
         lat: 48.86832,
         lng: 2.33362,
         type: 'Café',
@@ -237,6 +253,7 @@ export const spots = [
         tags: ['matcha latte', 'aesthetic'],
         description: '',
         instagram: 'cafekitsune',
+        tiktok: null,
     },
     {
         id: 18,
@@ -251,6 +268,7 @@ export const spots = [
         tags: ['matcha latte', 'aesthetic'],
         description: '',
         instagram: 'cafekitsune',
+        tiktok: null,
     },
     {
         id: 19,
@@ -265,6 +283,7 @@ export const spots = [
         tags: ['matcha latte', 'aesthetic'],
         description: '',
         instagram: 'cafekitsune',
+        tiktok: null,
     },
     {
         id: 20,
@@ -279,6 +298,7 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: 'kiji.paris',
+        tiktok: null,
     },
     {
         id: 21,
@@ -293,11 +313,12 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: 'akiboulangercafe',
+        tiktok: null,
     },
     {
         id: 22,
         name: 'Goodnews',
-        address: '14 Avenue de l\'Opéra, 75001 Paris',
+        address: "14 Avenue de l'Opéra, 75001 Paris",
         lat: 48.86529,
         lng: 2.33482,
         type: 'Café',
@@ -307,6 +328,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 23,
@@ -321,6 +343,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 24,
@@ -335,6 +358,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 25,
@@ -349,6 +373,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 26,
@@ -363,6 +388,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 27,
@@ -377,6 +403,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 28,
@@ -391,6 +418,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 29,
@@ -405,6 +433,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 30,
@@ -419,11 +448,12 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 31,
         name: 'Goodnews',
-        address: '45 Rue de la Chaussée d\'Antin, 75009 Paris',
+        address: "45 Rue de la Chaussée d'Antin, 75009 Paris",
         lat: 48.8753,
         lng: 2.33197,
         type: 'Café',
@@ -433,6 +463,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 32,
@@ -447,6 +478,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 33,
@@ -461,6 +493,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 34,
@@ -475,6 +508,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 35,
@@ -489,6 +523,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 36,
@@ -503,6 +538,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 37,
@@ -517,6 +553,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 38,
@@ -531,6 +568,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'goodnewscoffee',
+        tiktok: null,
     },
     {
         id: 39,
@@ -545,6 +583,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'hosobasqueparis_',
+        tiktok: null,
     },
     {
         id: 40,
@@ -559,11 +598,12 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'matchasocialclub',
+        tiktok: null,
     },
     {
         id: 41,
         name: 'Shukery Coffee & Matcha',
-        address: '18 Avenue de l\'Opéra, 75001',
+        address: "18 Avenue de l'Opéra, 75001",
         lat: 48.86563,
         lng: 2.33468,
         type: 'Café',
@@ -573,6 +613,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: 'shukerycoffee',
+        tiktok: null,
     },
     {
         id: 42,
@@ -587,6 +628,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'shibacafeparis',
+        tiktok: null,
     },
     {
         id: 43,
@@ -601,6 +643,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'shibacafeparis',
+        tiktok: null,
     },
     {
         id: 44,
@@ -615,6 +658,7 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: 'miyabi_matcha_paris',
+        tiktok: null,
     },
     {
         id: 45,
@@ -629,6 +673,7 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: 'fujikumo.fr',
+        tiktok: null,
     },
     {
         id: 46,
@@ -643,6 +688,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'the_matcha_paris',
+        tiktok: null,
     },
     {
         id: 47,
@@ -657,6 +703,7 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: 'kurashiparis',
+        tiktok: null,
     },
     {
         id: 48,
@@ -671,6 +718,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'source_matcha',
+        tiktok: null,
     },
     {
         id: 49,
@@ -685,6 +733,10 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '66.matcha',
+        tiktok: {
+            user: 'Matcha-Spot',
+            videoId: '7657613720901717280',
+        },
     },
     {
         id: 50,
@@ -699,6 +751,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'umami_matcha_cafe',
+        tiktok: null,
     },
     {
         id: 51,
@@ -713,6 +766,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'umami_matcha_cafe',
+        tiktok: null,
     },
     {
         id: 52,
@@ -727,6 +781,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: 'coffeearts.paris',
+        tiktok: null,
     },
     {
         id: 53,
@@ -741,6 +796,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'matchaya_paris',
+        tiktok: null,
     },
     {
         id: 54,
@@ -755,6 +811,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'minicafeparis',
+        tiktok: null,
     },
     {
         id: 55,
@@ -769,6 +826,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: 'jadematchagallery',
+        tiktok: null,
     },
     {
         id: 56,
@@ -783,6 +841,7 @@ export const spots = [
         tags: ['matcha', 'thé'],
         description: '',
         instagram: 'noomtea_paris',
+        tiktok: null,
     },
     {
         id: 57,
@@ -797,6 +856,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: 'mw.paris5',
+        tiktok: null,
     },
     {
         id: 58,
@@ -811,6 +871,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'naughtee.cafe',
+        tiktok: null,
     },
     {
         id: 59,
@@ -825,6 +886,7 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: 'lamaisondumochi',
+        tiktok: null,
     },
     {
         id: 60,
@@ -839,6 +901,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'boma_paris',
+        tiktok: null,
     },
     {
         id: 61,
@@ -853,6 +916,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'crible.cafe',
+        tiktok: null,
     },
     {
         id: 62,
@@ -867,6 +931,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: 'unnuagedelait_coffeeshop',
+        tiktok: null,
     },
     {
         id: 63,
@@ -881,6 +946,7 @@ export const spots = [
         tags: ['matcha', 'thé'],
         description: '',
         instagram: 'theoremedecamille',
+        tiktok: null,
     },
     {
         id: 64,
@@ -895,6 +961,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 65,
@@ -909,6 +976,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 66,
@@ -923,6 +991,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 67,
@@ -937,10 +1006,11 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 68,
-        name: 'Noly\'s',
+        name: "Noly's",
         address: '43 Avenue de la République, 75011',
         lat: 48.8653,
         lng: 2.37508,
@@ -951,6 +1021,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 69,
@@ -965,6 +1036,7 @@ export const spots = [
         tags: ['matcha', 'thé'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 70,
@@ -979,6 +1051,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 71,
@@ -993,6 +1066,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 72,
@@ -1007,6 +1081,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 73,
@@ -1021,6 +1096,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 74,
@@ -1035,6 +1111,7 @@ export const spots = [
         tags: ['matcha', 'thé'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 75,
@@ -1049,6 +1126,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 76,
@@ -1063,6 +1141,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 77,
@@ -1077,6 +1156,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 78,
@@ -1091,6 +1171,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 79,
@@ -1105,6 +1186,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 80,
@@ -1119,6 +1201,7 @@ export const spots = [
         tags: ['matcha', 'coréen'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 81,
@@ -1133,6 +1216,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 82,
@@ -1147,6 +1231,7 @@ export const spots = [
         tags: ['matcha', 'japonais'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 83,
@@ -1161,6 +1246,7 @@ export const spots = [
         tags: ['matcha'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 84,
@@ -1175,6 +1261,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 85,
@@ -1189,6 +1276,7 @@ export const spots = [
         tags: ['matcha', 'aesthetic'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 86,
@@ -1203,6 +1291,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 87,
@@ -1217,6 +1306,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 88,
@@ -1231,6 +1321,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 89,
@@ -1245,6 +1336,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 90,
@@ -1259,6 +1351,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 91,
@@ -1273,6 +1366,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 92,
@@ -1287,11 +1381,12 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 93,
         name: 'Noir - Coffee Shop',
-        address: '63 Rue Saint-Louis en l\'Île, 75004',
+        address: "63 Rue Saint-Louis en l'Île, 75004",
         lat: 48.85076,
         lng: 2.35954,
         type: 'Café',
@@ -1301,6 +1396,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 94,
@@ -1315,6 +1411,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 95,
@@ -1329,6 +1426,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 96,
@@ -1343,6 +1441,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 97,
@@ -1357,6 +1456,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 98,
@@ -1371,6 +1471,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 99,
@@ -1385,6 +1486,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 100,
@@ -1399,6 +1501,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 101,
@@ -1413,6 +1516,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 102,
@@ -1427,6 +1531,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 103,
@@ -1441,6 +1546,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 104,
@@ -1455,6 +1561,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 105,
@@ -1469,6 +1576,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 106,
@@ -1483,6 +1591,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 107,
@@ -1497,6 +1606,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 108,
@@ -1511,6 +1621,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 109,
@@ -1525,6 +1636,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 110,
@@ -1539,6 +1651,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 111,
@@ -1553,6 +1666,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 112,
@@ -1567,6 +1681,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 113,
@@ -1581,6 +1696,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 114,
@@ -1595,6 +1711,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 115,
@@ -1609,6 +1726,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 116,
@@ -1623,6 +1741,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 117,
@@ -1637,6 +1756,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 118,
@@ -1651,11 +1771,12 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 119,
         name: 'Cuvée Noire',
-        address: '78 Rue d\'Aboukir, 75002',
+        address: "78 Rue d'Aboukir, 75002",
         lat: 48.86777,
         lng: 2.34717,
         type: 'Café',
@@ -1665,6 +1786,7 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
     {
         id: 120,
@@ -1679,5 +1801,6 @@ export const spots = [
         tags: ['matcha', 'coffee'],
         description: '',
         instagram: '',
+        tiktok: null,
     },
 ]

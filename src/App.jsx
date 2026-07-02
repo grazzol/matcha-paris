@@ -1,8 +1,8 @@
 // src/App.jsx
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import MapPage from './pages/MapPage'
+import SpotPage from './pages/SpotPage'
 
 export default function App() {
   return (
@@ -10,6 +10,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/map" element={<MapPage />} />
+        <Route path="/spot/:slug" element={<SpotPage />} />
       </Routes>
     </BrowserRouter>
   )

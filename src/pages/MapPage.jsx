@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
 import Map from '../components/Map'
+import SuggestSpot from '../components/SuggestSpot'
 import { spots } from '../data/spots'
 import '../App.css'
 
@@ -81,6 +82,7 @@ export default function MapPage() {
                     favIds={favIds}
                     userPos={userPos}
                 />
+                <SuggestSpot />
                 <Footer />
             </div>
 

@@ -1,5 +1,7 @@
 // src/components/Sidebar.jsx
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toSlug } from '../utils/slugify'
 
 const TYPES = ['Tous', 'Café', 'Salon de thé']
 
@@ -44,7 +46,6 @@ function cpToLabel(cp) {
     return cp
 }
 
-// Calcule la distance en mètres entre deux points (formule Haversine)
 function getDistance(lat1, lng1, lat2, lng2) {
     const R = 6371000
     const dLat = (lat2 - lat1) * Math.PI / 180
@@ -73,10 +74,14 @@ function HeartIcon({ filled }) {
 }
 
 function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
+    const navigate = useNavigate()
+
     return (
         <div className="spot-detail">
             <button className="spot-detail-close" onClick={onClose}>✕</button>
+
             <div className="spot-detail-type">{spot.type}</div>
+
             <div className="spot-detail-name-row">
                 <h2 className="spot-detail-name">{spot.name}</h2>
                 <button
@@ -87,6 +92,7 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
                     <HeartIcon filled={isFav} />
                 </button>
             </div>
+
             <p className="spot-detail-address">
                 {spot.address}
                 {distance != null && (
@@ -96,8 +102,9 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
 
             {spot.rating && (
                 <div className="spot-detail-rating">
-                    {'★'.repeat(Math.round(spot.rating))}{'☆'.repeat(5 - Math.round(spot.rating))}
-                    <span> {spot.rating} {spot.userRatingCount ? `(${spot.userRatingCount} avis)` : ''}</span>
+                    {'★'.repeat(Math.round(spot.rating))}
+                    {'☆'.repeat(5 - Math.round(spot.rating))}
+                    <span> {spot.rating}{spot.userRatingCount ? ` (${spot.userRatingCount} avis)` : ''}</span>
                 </div>
             )}
 
@@ -114,6 +121,20 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
             )}
 
             <div className="spot-detail-actions">
+                {/* Voir la page du spot */}
+                <button
+                    className="spot-action-btn spot-action-page"
+                    onClick={() => navigate(`/spot/${toSlug(spot.name, spot.address)}`)}
+                >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                    Voir la page du spot
+                </button>
+
+                {/* Instagram */}
                 {spot.instagram && (
                     <a
                         href={`https://instagram.com/${spot.instagram}`}
@@ -129,6 +150,8 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
                         @{spot.instagram}
                     </a>
                 )}
+
+                {/* Google Maps */}
                 <a
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + spot.address)}`}
                     target="_blank"
@@ -179,7 +202,6 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
         }, 100)
     }
 
-    // Calcule les distances si on a la position
     const spotsWithDistance = spots.map(s => ({
         ...s,
         distance: userPos && s.lat && s.lng
@@ -196,10 +218,7 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
             return matchType && matchSearch && matchArr && matchFav
         })
         .sort((a, b) => {
-            // Si géoloc active → tri par distance
-            if (userPos && a.distance != null && b.distance != null) {
-                return a.distance - b.distance
-            }
+            if (userPos && a.distance != null && b.distance != null) return a.distance - b.distance
             return a.name.localeCompare(b.name, 'fr')
         })
 
@@ -219,20 +238,17 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                 <div className="sidebar-header-top">
                     <h1>Matcha <em>Paris</em></h1>
                     <div className="sidebar-header-actions">
-                        {/* Géolocalisation */}
                         <button
                             className={`locate-btn ${userPos ? 'active' : ''} ${locating ? 'locating' : ''}`}
                             onClick={onLocate}
                             title="Autour de moi"
                         >
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" strokeWidth="2">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <circle cx="12" cy="12" r="3" />
                                 <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
                                 <circle cx="12" cy="12" r="8" strokeOpacity="0.3" />
                             </svg>
                         </button>
-                        {/* Spot aléatoire */}
                         <button
                             className={`random-btn ${diceAnim ? 'spin' : ''}`}
                             onClick={handleRandom}
@@ -240,7 +256,6 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                         >
                             🎲
                         </button>
-                        {/* Favoris */}
                         <button
                             className={`fav-filter-btn ${showFavsOnly ? 'active' : ''}`}
                             onClick={() => setShowFavsOnly(!showFavsOnly)}
