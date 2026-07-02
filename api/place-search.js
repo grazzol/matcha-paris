@@ -10,7 +10,7 @@ function isAllowed(req) {
     return ALLOWED_ORIGINS.some(o => origin.startsWith(o))
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     if (!isAllowed(req)) {
         return res.status(403).json({ error: 'Accès refusé' })
     }
