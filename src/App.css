@@ -910,6 +910,23 @@ body,
   transition: all var(--transition);
 }
 
+@media (max-width: 768px) {
+  .suggest-fab {
+    bottom: 90px;
+    /* au dessus du FAB liste */
+    padding: 12px;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+  }
+
+  .suggest-fab span {
+    display: none;
+  }
+}
+
+
 .suggest-fab:hover {
   background: #fff;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -1055,4 +1072,69 @@ body,
 
 .spot-action-page:hover {
   background: var(--sage-hover);
+}
+
+/* Infos pratiques */
+.info-dropdown {
+  background: #fff;
+  border: 1px solid var(--sage-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sage-border) transparent;
+}
+
+.info-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+.info-dropdown::-webkit-scrollbar-thumb {
+  background: var(--sage-border);
+  border-radius: 2px;
+}
+
+.info-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-filter-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--sage-muted);
+}
+
+.info-filter-options {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.spot-detail-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 6px 0 10px;
+}
+
+.info-badge {
+  background: var(--sage-active);
+  color: var(--sage-accent-dk);
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+
+.spot-prix {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--sage-accent);
 }

@@ -14,6 +14,14 @@ export const spots = [
         description: '',
         instagram: 'patisserietomo',
         tiktok: null,
+        info: {
+            prix: 3,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: false,          // true = PC possible, false = non, null = non renseigné
+            matcha: 5,         // note /5, null = non renseigné
+            calme: 5,          // note /5, null = non renseigné
+            originalite: 5,    // note /5, null = non renseigné
+        },
     },
     {
         id: 2,
@@ -29,6 +37,14 @@ export const spots = [
         description: '',
         instagram: 'dearjanebakery',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 3,
@@ -44,6 +60,14 @@ export const spots = [
         description: '',
         instagram: 'shodaimatcha',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 4,
@@ -59,6 +83,14 @@ export const spots = [
         description: '',
         instagram: 'shodaimatcha',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 5,
@@ -74,6 +106,14 @@ export const spots = [
         description: '',
         instagram: 'shodaimatcha',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 6,
@@ -89,6 +129,14 @@ export const spots = [
         description: '',
         instagram: 'shodaimatcha',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 7,
@@ -104,6 +152,14 @@ export const spots = [
         description: '',
         instagram: 'shodaimatcha',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 8,
@@ -119,6 +175,14 @@ export const spots = [
         description: '',
         instagram: 'moonlight.cafe.paris',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 9,
@@ -134,6 +198,14 @@ export const spots = [
         description: '',
         instagram: 'kurageparis',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 10,
@@ -149,6 +221,14 @@ export const spots = [
         description: '',
         instagram: 'kurageparis',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 11,
@@ -164,6 +244,14 @@ export const spots = [
         description: '',
         instagram: 'seamercoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 12,
@@ -179,6 +267,14 @@ export const spots = [
         description: '',
         instagram: 'cafenuances',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 13,
@@ -194,6 +290,14 @@ export const spots = [
         description: '',
         instagram: 'cafenuances',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 14,
@@ -209,6 +313,14 @@ export const spots = [
         description: '',
         instagram: 'cafenuances',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 15,
@@ -224,6 +336,14 @@ export const spots = [
         description: '',
         instagram: 'cafenuances',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 16,
@@ -239,6 +359,14 @@ export const spots = [
         description: '',
         instagram: 'cafekitsune',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 17,
@@ -254,6 +382,14 @@ export const spots = [
         description: '',
         instagram: 'cafekitsune',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 18,
@@ -269,6 +405,14 @@ export const spots = [
         description: '',
         instagram: 'cafekitsune',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 19,
@@ -284,6 +428,14 @@ export const spots = [
         description: '',
         instagram: 'cafekitsune',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 20,
@@ -299,6 +451,14 @@ export const spots = [
         description: '',
         instagram: 'kiji.paris',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 21,
@@ -314,6 +474,14 @@ export const spots = [
         description: '',
         instagram: 'akiboulangercafe',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 22,
@@ -329,6 +497,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 23,
@@ -344,6 +520,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 24,
@@ -359,6 +543,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 25,
@@ -374,6 +566,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 26,
@@ -389,6 +589,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 27,
@@ -404,6 +612,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 28,
@@ -419,6 +635,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 29,
@@ -434,6 +658,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 30,
@@ -449,6 +681,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 31,
@@ -464,6 +704,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 32,
@@ -479,6 +727,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 33,
@@ -494,6 +750,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 34,
@@ -509,6 +773,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 35,
@@ -524,6 +796,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 36,
@@ -539,6 +819,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 37,
@@ -554,6 +842,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 38,
@@ -569,6 +865,14 @@ export const spots = [
         description: '',
         instagram: 'goodnewscoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 39,
@@ -584,6 +888,14 @@ export const spots = [
         description: '',
         instagram: 'hosobasqueparis_',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 40,
@@ -599,6 +911,14 @@ export const spots = [
         description: '',
         instagram: 'matchasocialclub',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 41,
@@ -614,6 +934,14 @@ export const spots = [
         description: '',
         instagram: 'shukerycoffee',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 42,
@@ -629,6 +957,14 @@ export const spots = [
         description: '',
         instagram: 'shibacafeparis',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 43,
@@ -644,6 +980,14 @@ export const spots = [
         description: '',
         instagram: 'shibacafeparis',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 44,
@@ -659,6 +1003,14 @@ export const spots = [
         description: '',
         instagram: 'miyabi_matcha_paris',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 45,
@@ -674,6 +1026,14 @@ export const spots = [
         description: '',
         instagram: 'fujikumo.fr',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 46,
@@ -689,6 +1049,14 @@ export const spots = [
         description: '',
         instagram: 'the_matcha_paris',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 47,
@@ -704,6 +1072,14 @@ export const spots = [
         description: '',
         instagram: 'kurashiparis',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 48,
@@ -719,6 +1095,14 @@ export const spots = [
         description: '',
         instagram: 'source_matcha',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 49,
@@ -737,6 +1121,14 @@ export const spots = [
             user: 'Matcha-Spot',
             videoId: '7657613720901717280',
         },
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 50,
@@ -752,6 +1144,14 @@ export const spots = [
         description: '',
         instagram: 'umami_matcha_cafe',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 51,
@@ -767,6 +1167,14 @@ export const spots = [
         description: '',
         instagram: 'umami_matcha_cafe',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 52,
@@ -782,6 +1190,14 @@ export const spots = [
         description: '',
         instagram: 'coffeearts.paris',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 53,
@@ -797,6 +1213,14 @@ export const spots = [
         description: '',
         instagram: 'matchaya_paris',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 54,
@@ -812,6 +1236,14 @@ export const spots = [
         description: '',
         instagram: 'minicafeparis',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 55,
@@ -827,6 +1259,14 @@ export const spots = [
         description: '',
         instagram: 'jadematchagallery',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 56,
@@ -842,6 +1282,14 @@ export const spots = [
         description: '',
         instagram: 'noomtea_paris',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 57,
@@ -857,6 +1305,14 @@ export const spots = [
         description: '',
         instagram: 'mw.paris5',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 58,
@@ -872,6 +1328,14 @@ export const spots = [
         description: '',
         instagram: 'naughtee.cafe',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 59,
@@ -887,6 +1351,14 @@ export const spots = [
         description: '',
         instagram: 'lamaisondumochi',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 60,
@@ -902,6 +1374,14 @@ export const spots = [
         description: '',
         instagram: 'boma_paris',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 61,
@@ -917,6 +1397,14 @@ export const spots = [
         description: '',
         instagram: 'crible.cafe',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 62,
@@ -932,6 +1420,14 @@ export const spots = [
         description: '',
         instagram: 'unnuagedelait_coffeeshop',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 63,
@@ -947,6 +1443,14 @@ export const spots = [
         description: '',
         instagram: 'theoremedecamille',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 64,
@@ -962,6 +1466,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 65,
@@ -977,6 +1489,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 66,
@@ -992,6 +1512,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 67,
@@ -1007,6 +1535,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 68,
@@ -1022,6 +1558,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 69,
@@ -1037,6 +1581,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 70,
@@ -1052,6 +1604,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 71,
@@ -1067,6 +1627,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 72,
@@ -1082,6 +1650,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 73,
@@ -1097,6 +1673,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 74,
@@ -1112,6 +1696,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 75,
@@ -1127,6 +1719,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 76,
@@ -1142,6 +1742,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 77,
@@ -1157,6 +1765,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 78,
@@ -1172,6 +1788,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 79,
@@ -1187,6 +1811,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 80,
@@ -1202,6 +1834,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 81,
@@ -1217,6 +1857,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 82,
@@ -1232,6 +1880,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 83,
@@ -1247,6 +1903,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 84,
@@ -1262,6 +1926,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 85,
@@ -1277,6 +1949,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 86,
@@ -1292,6 +1972,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 87,
@@ -1307,6 +1995,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 88,
@@ -1322,6 +2018,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 89,
@@ -1337,6 +2041,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 90,
@@ -1352,6 +2064,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 91,
@@ -1367,6 +2087,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 92,
@@ -1382,6 +2110,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 93,
@@ -1397,6 +2133,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 94,
@@ -1412,6 +2156,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 95,
@@ -1427,6 +2179,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 96,
@@ -1442,6 +2202,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 97,
@@ -1457,6 +2225,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 98,
@@ -1472,6 +2248,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 99,
@@ -1487,6 +2271,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 100,
@@ -1502,6 +2294,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 101,
@@ -1517,6 +2317,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 102,
@@ -1532,6 +2340,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 103,
@@ -1547,6 +2363,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 104,
@@ -1562,6 +2386,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 105,
@@ -1577,6 +2409,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 106,
@@ -1592,6 +2432,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 107,
@@ -1607,6 +2455,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 108,
@@ -1622,6 +2478,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 109,
@@ -1637,6 +2501,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 110,
@@ -1652,6 +2524,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 111,
@@ -1667,6 +2547,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 112,
@@ -1682,6 +2570,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 113,
@@ -1697,6 +2593,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 114,
@@ -1712,6 +2616,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 115,
@@ -1727,6 +2639,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 116,
@@ -1742,6 +2662,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 117,
@@ -1757,6 +2685,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 118,
@@ -1772,6 +2708,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 119,
@@ -1787,6 +2731,14 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
     {
         id: 120,
@@ -1802,5 +2754,13 @@ export const spots = [
         description: '',
         instagram: '',
         tiktok: null,
+        info: {
+            prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
+            place: true,       // true = spacieux, false = petit, null = non renseigné
+            pc: true,          // true = PC possible, false = non, null = non renseigné
+            matcha: 4,         // note /5, null = non renseigné
+            calme: 3,          // note /5, null = non renseigné
+            originalite: 4,    // note /5, null = non renseigné
+        },
     },
 ]

@@ -61,6 +61,31 @@ function formatDistance(meters) {
     return `${(meters / 1000).toFixed(1)}km`
 }
 
+function prixLabel(n) {
+    if (!n) return null
+    return '€'.repeat(n)
+}
+
+function starsLabel(n) {
+    if (!n) return null
+    return '★'.repeat(n) + '☆'.repeat(5 - n)
+}
+
+// Score de correspondance pour le filtre infos pratiques
+function infoScore(spot, infoFilters) {
+    if (!infoFilters || Object.keys(infoFilters).length === 0) return 0
+    let score = 0
+    const info = spot.info
+    if (!info) return 0
+    if (infoFilters.prix && info.prix === infoFilters.prix) score++
+    if (infoFilters.place !== undefined && info.place === infoFilters.place) score++
+    if (infoFilters.pc !== undefined && info.pc === infoFilters.pc) score++
+    if (infoFilters.matcha && info.matcha >= infoFilters.matcha) score++
+    if (infoFilters.calme && info.calme >= infoFilters.calme) score++
+    if (infoFilters.originalite && info.originalite >= infoFilters.originalite) score++
+    return score
+}
+
 function HeartIcon({ filled }) {
     return (
         <svg width="15" height="15" viewBox="0 0 24 24"
@@ -79,9 +104,7 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
     return (
         <div className="spot-detail">
             <button className="spot-detail-close" onClick={onClose}>✕</button>
-
             <div className="spot-detail-type">{spot.type}</div>
-
             <div className="spot-detail-name-row">
                 <h2 className="spot-detail-name">{spot.name}</h2>
                 <button
@@ -95,33 +118,49 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
 
             <p className="spot-detail-address">
                 {spot.address}
-                {distance != null && (
-                    <span className="spot-detail-distance"> · {formatDistance(distance)}</span>
-                )}
+                {distance != null && <span className="spot-detail-distance"> · {formatDistance(distance)}</span>}
             </p>
 
             {spot.rating && (
                 <div className="spot-detail-rating">
-                    {'★'.repeat(Math.round(spot.rating))}
-                    {'☆'.repeat(5 - Math.round(spot.rating))}
+                    {'★'.repeat(Math.round(spot.rating))}{'☆'.repeat(5 - Math.round(spot.rating))}
                     <span> {spot.rating}{spot.userRatingCount ? ` (${spot.userRatingCount} avis)` : ''}</span>
                 </div>
             )}
 
-            {spot.description && (
-                <p className="spot-detail-desc">{spot.description}</p>
+            {/* Infos pratiques */}
+            {spot.info && (
+                <div className="spot-detail-info">
+                    {spot.info.prix && (
+                        <span className="info-badge">{'€'.repeat(spot.info.prix)}</span>
+                    )}
+                    {spot.info.place !== null && spot.info.place !== undefined && (
+                        <span className="info-badge">{spot.info.place ? '🪑 Spacieux' : '🪑 Petit'}</span>
+                    )}
+                    {spot.info.pc !== null && spot.info.pc !== undefined && (
+                        <span className="info-badge">{spot.info.pc ? '💻 PC ok' : '💻 PC non'}</span>
+                    )}
+                    {spot.info.matcha && (
+                        <span className="info-badge">🍵 {'★'.repeat(spot.info.matcha)}</span>
+                    )}
+                    {spot.info.calme && (
+                        <span className="info-badge">{spot.info.calme >= 4 ? '🤫 Calme' : spot.info.calme >= 2 ? '💬 Moyen' : '🔊 Bruyant'}</span>
+                    )}
+                    {spot.info.originalite && (
+                        <span className="info-badge">✨ {'★'.repeat(spot.info.originalite)}</span>
+                    )}
+                </div>
             )}
+
+            {spot.description && <p className="spot-detail-desc">{spot.description}</p>}
 
             {spot.tags?.length > 0 && (
                 <div className="spot-detail-tags">
-                    {spot.tags.map(tag => (
-                        <span key={tag} className="spot-tag">{tag}</span>
-                    ))}
+                    {spot.tags.map(tag => <span key={tag} className="spot-tag">{tag}</span>)}
                 </div>
             )}
 
             <div className="spot-detail-actions">
-                {/* Voir la page du spot */}
                 <button
                     className="spot-action-btn spot-action-page"
                     onClick={() => navigate(`/spot/${toSlug(spot.name, spot.address)}`)}
@@ -133,15 +172,8 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
                     </svg>
                     Voir la page du spot
                 </button>
-
-                {/* Instagram */}
                 {spot.instagram && (
-                    <a
-                        href={`https://instagram.com/${spot.instagram}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="spot-action-btn spot-action-instagram"
-                    >
+                    <a href={`https://instagram.com/${spot.instagram}`} target="_blank" rel="noreferrer" className="spot-action-btn spot-action-instagram">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                             <circle cx="12" cy="12" r="4" />
@@ -150,12 +182,9 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
                         @{spot.instagram}
                     </a>
                 )}
-
-                {/* Google Maps */}
                 <a
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + spot.address)}`}
-                    target="_blank"
-                    rel="noreferrer"
+                    target="_blank" rel="noreferrer"
                     className="spot-action-btn spot-action-maps"
                 >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -169,17 +198,41 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
     )
 }
 
+// Composant dropdown générique
+function FilterDropdown({ label, active, open, onToggle, onClear, children }) {
+    return (
+        <div className="arr-filter-row">
+            <button
+                className={`filter-btn arr-toggle ${active ? 'active' : ''}`}
+                onClick={onToggle}
+            >
+                {label}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                    style={{ marginLeft: 4, transform: open ? 'rotate(180deg)' : 'none', transition: '0.18s' }}>
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
+            </button>
+            {active && (
+                <button className="filter-btn arr-clear" onClick={onClear}>✕</button>
+            )}
+        </div>
+    )
+}
+
 export default function Sidebar({ spots, onSelect, selected, className, favIds, onToggleFav, userPos, onLocate, locating }) {
     const [search, setSearch] = useState('')
     const [type, setType] = useState('Tous')
     const [arrFilter, setArrFilter] = useState(null)
     const [showArrFilter, setShowArrFilter] = useState(false)
+    const [infoFilters, setInfoFilters] = useState({})
+    const [showInfoFilter, setShowInfoFilter] = useState(false)
     const [expandedId, setExpandedId] = useState(null)
     const [showFavsOnly, setShowFavsOnly] = useState(false)
     const [diceAnim, setDiceAnim] = useState(false)
     const listRef = useRef(null)
 
     const availableArr = getAvailableArrondissements(spots)
+    const hasInfoFilter = Object.keys(infoFilters).length > 0
 
     useEffect(() => {
         if (selected) {
@@ -202,6 +255,15 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
         }, 100)
     }
 
+    const toggleInfoFilter = (key, value) => {
+        setInfoFilters(prev => {
+            const next = { ...prev }
+            if (next[key] === value) delete next[key]
+            else next[key] = value
+            return next
+        })
+    }
+
     const spotsWithDistance = spots.map(s => ({
         ...s,
         distance: userPos && s.lat && s.lng
@@ -219,6 +281,12 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
         })
         .sort((a, b) => {
             if (userPos && a.distance != null && b.distance != null) return a.distance - b.distance
+            // Si filtres infos actifs → trier par score de correspondance
+            if (hasInfoFilter) {
+                const scoreB = infoScore(b, infoFilters)
+                const scoreA = infoScore(a, infoFilters)
+                if (scoreA !== scoreB) return scoreB - scoreA
+            }
             return a.name.localeCompare(b.name, 'fr')
         })
 
@@ -270,6 +338,7 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                     {filtered.length} spots
                     {showFavsOnly ? ' • favoris' : ''}
                     {userPos ? ' • trié par distance' : ''}
+                    {hasInfoFilter ? ' • filtré' : ''}
                 </p>
             </div>
 
@@ -294,22 +363,14 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                     ))}
                 </div>
 
-                <div className="arr-filter-row">
-                    <button
-                        className={`filter-btn arr-toggle ${arrFilter ? 'active' : ''}`}
-                        onClick={() => setShowArrFilter(!showArrFilter)}
-                    >
-                        {arrFilter ? `📍 ${cpToLabel(arrFilter)}` : 'Arrondissement'}
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                            style={{ marginLeft: 4, transform: showArrFilter ? 'rotate(180deg)' : 'none', transition: '0.18s' }}>
-                            <polyline points="6 9 12 15 18 9" />
-                        </svg>
-                    </button>
-                    {arrFilter && (
-                        <button className="filter-btn arr-clear" onClick={() => { setArrFilter(null); setShowArrFilter(false) }}>✕</button>
-                    )}
-                </div>
-
+                {/* Filtre arrondissement */}
+                <FilterDropdown
+                    label={arrFilter ? `📍 ${cpToLabel(arrFilter)}` : 'Arrondissement'}
+                    active={!!arrFilter}
+                    open={showArrFilter}
+                    onToggle={() => setShowArrFilter(!showArrFilter)}
+                    onClear={() => { setArrFilter(null); setShowArrFilter(false) }}
+                />
                 {showArrFilter && (
                     <div className="arr-dropdown">
                         {availableArr.map(cp => (
@@ -321,6 +382,123 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                                 {cpToLabel(cp)}
                             </button>
                         ))}
+                    </div>
+                )}
+
+                {/* Filtre infos pratiques */}
+                <FilterDropdown
+                    label="Infos pratiques"
+                    active={hasInfoFilter}
+                    open={showInfoFilter}
+                    onToggle={() => setShowInfoFilter(!showInfoFilter)}
+                    onClear={() => setInfoFilters({})}
+                />
+                {showInfoFilter && (
+                    <div className="info-dropdown">
+                        {/* Prix */}
+                        <div className="info-filter-group">
+                            <span className="info-filter-label">Prix</span>
+                            <div className="info-filter-options">
+                                {[1, 2, 3].map(p => (
+                                    <button
+                                        key={p}
+                                        className={`arr-option ${infoFilters.prix === p ? 'active' : ''}`}
+                                        onClick={() => toggleInfoFilter('prix', p)}
+                                    >
+                                        {'€'.repeat(p)}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Place */}
+                        <div className="info-filter-group">
+                            <span className="info-filter-label">Place</span>
+                            <div className="info-filter-options">
+                                <button
+                                    className={`arr-option ${infoFilters.place === true ? 'active' : ''}`}
+                                    onClick={() => toggleInfoFilter('place', true)}
+                                >
+                                    🪑 Spacieux
+                                </button>
+                                <button
+                                    className={`arr-option ${infoFilters.place === false ? 'active' : ''}`}
+                                    onClick={() => toggleInfoFilter('place', false)}
+                                >
+                                    🪑 Petit
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* PC */}
+                        <div className="info-filter-group">
+                            <span className="info-filter-label">Travail au PC</span>
+                            <div className="info-filter-options">
+                                <button
+                                    className={`arr-option ${infoFilters.pc === true ? 'active' : ''}`}
+                                    onClick={() => toggleInfoFilter('pc', true)}
+                                >
+                                    💻 Possible
+                                </button>
+                                <button
+                                    className={`arr-option ${infoFilters.pc === false ? 'active' : ''}`}
+                                    onClick={() => toggleInfoFilter('pc', false)}
+                                >
+                                    💻 Non
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Qualité matcha */}
+                        <div className="info-filter-group">
+                            <span className="info-filter-label">Qualité matcha (min)</span>
+                            <div className="info-filter-options">
+                                {[3, 4, 5].map(n => (
+                                    <button
+                                        key={n}
+                                        className={`arr-option ${infoFilters.matcha === n ? 'active' : ''}`}
+                                        onClick={() => toggleInfoFilter('matcha', n)}
+                                    >
+                                        {'★'.repeat(n)}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Calme */}
+                        <div className="info-filter-group">
+                            <span className="info-filter-label">Ambiance</span>
+                            <div className="info-filter-options">
+                                <button
+                                    className={`arr-option ${infoFilters.calme === 4 ? 'active' : ''}`}
+                                    onClick={() => toggleInfoFilter('calme', 4)}
+                                >
+                                    🤫 Calme
+                                </button>
+                                <button
+                                    className={`arr-option ${infoFilters.calme === 2 ? 'active' : ''}`}
+                                    onClick={() => toggleInfoFilter('calme', 2)}
+                                >
+                                    🔊 Animé
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Originalité */}
+                        <div className="info-filter-group">
+                            <span className="info-filter-label">Originalité recettes (min)</span>
+                            <div className="info-filter-options">
+                                {[3, 4, 5].map(n => (
+                                    <button
+                                        key={n}
+                                        className={`arr-option ${infoFilters.originalite === n ? 'active' : ''}`}
+                                        onClick={() => toggleInfoFilter('originalite', n)}
+                                    >
+                                        {'★'.repeat(n)}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
@@ -360,9 +538,8 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                             <div className="spot-meta">
                                 <span>{spot.type}</span>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                    {spot.distance != null && (
-                                        <span className="spot-distance">{formatDistance(spot.distance)}</span>
-                                    )}
+                                    {spot.distance != null && <span className="spot-distance">{formatDistance(spot.distance)}</span>}
+                                    {spot.info?.prix && <span className="spot-prix">{'€'.repeat(spot.info.prix)}</span>}
                                     {spot.rating && <span className="spot-rating-badge">★ {spot.rating}</span>}
                                     {!userPos && <span className="spot-arr">{getArrondissement(spot.address)}</span>}
                                 </div>

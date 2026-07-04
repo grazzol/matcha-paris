@@ -59,7 +59,13 @@ export default function Home() {
 
             <footer className="home-footer">
                 <span>Fait avec 🍵 à Paris</span>
-                <span className="home-copyright">© {new Date().getFullYear()} Matcha Paris — Tous droits réservés</span>
+                <button
+                    onClick={() => navigate('/about')}
+                    className="home-about-btn"
+                >
+                    À propos →
+                </button>
+                <span className="home-copyright">© {new Date().getFullYear()} Matcha Paris</span>
             </footer>
 
         </div>
