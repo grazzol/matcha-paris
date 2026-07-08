@@ -11,9 +11,9 @@ function isAllowed(req) {
 }
 
 export default async function handler(req, res) {
-  // if (!isAllowed(req)) {
-  //   return res.status(403).json({ error: 'Accès refusé' })
-  // }
+  if (!isAllowed(req)) {
+    return res.status(403).json({ error: 'Accès refusé' })
+  }
 
   const { placeId } = req.query
 
