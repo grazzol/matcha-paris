@@ -1138,3 +1138,84 @@ body,
   font-weight: 600;
   color: var(--sage-accent);
 }
+
+/* Bouton ouvert maintenant */
+.open-now-btn {
+  background: none;
+  border: 1px solid var(--sage-border);
+  border-radius: 20px;
+  padding: 5px 11px;
+  font-size: 11px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sage-muted);
+  white-space: nowrap;
+}
+
+.open-now-btn.active {
+  border-color: #2d7a2d;
+  color: #2d7a2d;
+  background: rgba(45, 122, 45, 0.08);
+}
+
+.open-now-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ccc;
+  flex-shrink: 0;
+}
+
+.open-now-dot.active {
+  background: #2d9e2d;
+}
+
+/* Tableau horaires */
+.spot-hours-table {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: var(--ink-muted);
+}
+
+.hours-row.today {
+  background: var(--sage-active);
+  color: var(--sage-accent-dk);
+  font-weight: 500;
+}
+
+.hours-value.closed {
+  color: #bbb;
+}
+
+.hours-day {
+  min-width: 80px;
+}
+
+.open-now-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ccc;
+  display: inline-block;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.open-now-dot.active {
+  background: #2d9e2d;
+}

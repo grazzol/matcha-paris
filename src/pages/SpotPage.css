@@ -254,3 +254,35 @@
     cursor: pointer;
     font-family: var(--font-body);
 }
+
+.spot-open-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 8px 0;
+}
+
+.spot-open-status .open-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.spot-open-status.open {
+    color: #2d7a2d;
+}
+
+.spot-open-status.open .open-dot {
+    background: #2d9e2d;
+}
+
+.spot-open-status.closed {
+    color: #999;
+}
+
+.spot-open-status.closed .open-dot {
+    background: #ccc;
+}

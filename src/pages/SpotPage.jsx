@@ -9,6 +9,7 @@ import { toSlug } from '../utils/slugify'
 import { SITE_NAME, SITE_URL, SITE_IMAGE } from '../utils/seo'
 import 'leaflet/dist/leaflet.css'
 import './SpotPage.css'
+import { isOpenNow, getCloseTime, getWeeklyHours } from '../utils/isOpen'
 
 const spotIcon = L.divIcon({
     className: '',
@@ -134,6 +135,40 @@ export default function SpotPage() {
                             </div>
                         )}
                     </div>
+
+                    {(() => {
+                        const open = isOpenNow(spot.hours)
+                        const closeTime = open ? getCloseTime(spot.hours) : null
+                        const weekly = getWeeklyHours(spot.hours)
+                        const today = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1
+
+                        return (
+                            <>
+                                {open !== null && (
+                                    <div className={`spot-open-status ${open ? 'open' : 'closed'}`}>
+                                        <span className="open-dot" />
+                                        {open
+                                            ? `Ouvert${closeTime ? ` · ferme à ${closeTime}` : ''}`
+                                            : 'Fermé'
+                                        }
+                                    </div>
+                                )}
+                                {weekly && (
+                                    <section className="spot-page-section">
+                                        <h2>Horaires</h2>
+                                        <div className="spot-hours-table">
+                                            {weekly.map((d, i) => (
+                                                <div key={d.label} className={`hours-row ${i === today ? 'today' : ''}`}>
+                                                    <span className="hours-day">{d.label}</span>
+                                                    <span className={`hours-value ${d.closed ? 'closed' : ''}`}>{d.value}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                )}
+                            </>
+                        )
+                    })()}
 
                     {spot.description && (
                         <section className="spot-page-section">

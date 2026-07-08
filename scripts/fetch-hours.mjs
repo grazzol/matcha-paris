@@ -1,5 +1,4 @@
 // scripts/fetch-hours.mjs
-// Récupère les horaires d'ouverture via l'API Vercel et met à jour spots.js
 // Lance avec : node scripts/fetch-hours.mjs
 
 import fs from 'fs'
@@ -15,8 +14,11 @@ async function fetchHours(placeId) {
     const url = `${VERCEL_URL}/api/place-details?placeId=${placeId}`
     const res = await fetch(url)
     const data = await res.json()
-    if (!data.regularOpeningHours?.periods) return null
-    return data.regularOpeningHours.periods.map(p => ({
+
+    const oh = data.regularOpeningHours
+    if (!oh?.periods) return null
+
+    return oh.periods.map(p => ({
         open: { day: p.open.day, hour: p.open.hour, minute: p.open.minute },
         close: p.close ? { day: p.close.day, hour: p.close.hour, minute: p.close.minute } : null,
     }))
@@ -39,17 +41,18 @@ async function main() {
         try {
             const hours = await fetchHours(spot.placeId)
             results.push({ ...spot, hours })
-            console.log(hours ? `✓ ${hours.length} plages` : '✗ horaires non disponibles')
+            console.log(hours ? `✓ ${hours.length} plages` : '✗ non disponible')
         } catch (e) {
             results.push({ ...spot, hours: null })
             console.log(`✗ erreur: ${e.message}`)
         }
 
-        await sleep(300)
+        await sleep(350)
     }
 
     const lines = results.map(s => {
         const tagsStr = s.tags.map(t => `'${t.replace(/'/g, "\\'")}'`).join(', ')
+
         const hoursStr = s.hours
             ? `[\n${s.hours.map(p => {
                 const close = p.close

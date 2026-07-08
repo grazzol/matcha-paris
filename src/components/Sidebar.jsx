@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toSlug } from '../utils/slugify'
+import { isOpenNow, getCloseTime, getWeeklyHours } from '../utils/isOpen'
 
 const TYPES = ['Tous', 'Café', 'Salon de thé']
 
@@ -61,17 +62,6 @@ function formatDistance(meters) {
     return `${(meters / 1000).toFixed(1)}km`
 }
 
-function prixLabel(n) {
-    if (!n) return null
-    return '€'.repeat(n)
-}
-
-function starsLabel(n) {
-    if (!n) return null
-    return '★'.repeat(n) + '☆'.repeat(5 - n)
-}
-
-// Score de correspondance pour le filtre infos pratiques
 function infoScore(spot, infoFilters) {
     if (!infoFilters || Object.keys(infoFilters).length === 0) return 0
     let score = 0
@@ -98,13 +88,48 @@ function HeartIcon({ filled }) {
     )
 }
 
+function HoursBlock({ hours }) {
+    const open = isOpenNow(hours)
+    const closeTime = open ? getCloseTime(hours) : null
+    const weekly = getWeeklyHours(hours)
+    const today = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1
+
+    if (!hours) return null
+
+    return (
+        <>
+            {open !== null && (
+                <div className={`spot-open-status ${open ? 'open' : 'closed'}`}>
+                    <span className="open-dot" />
+                    {open
+                        ? `Ouvert${closeTime ? ` · ferme à ${closeTime}` : ''}`
+                        : 'Fermé'
+                    }
+                </div>
+            )}
+            {weekly && (
+                <div className="spot-hours-table">
+                    {weekly.map((d, i) => (
+                        <div key={d.label} className={`hours-row ${i === today ? 'today' : ''}`}>
+                            <span className="hours-day">{d.label}</span>
+                            <span className={`hours-value ${d.closed ? 'closed' : ''}`}>{d.value}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </>
+    )
+}
+
 function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
     const navigate = useNavigate()
 
     return (
         <div className="spot-detail">
             <button className="spot-detail-close" onClick={onClose}>✕</button>
+
             <div className="spot-detail-type">{spot.type}</div>
+
             <div className="spot-detail-name-row">
                 <h2 className="spot-detail-name">{spot.name}</h2>
                 <button
@@ -121,6 +146,8 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
                 {distance != null && <span className="spot-detail-distance"> · {formatDistance(distance)}</span>}
             </p>
 
+            <HoursBlock hours={spot.hours} />
+
             {spot.rating && (
                 <div className="spot-detail-rating">
                     {'★'.repeat(Math.round(spot.rating))}{'☆'.repeat(5 - Math.round(spot.rating))}
@@ -128,27 +155,22 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
                 </div>
             )}
 
-            {/* Infos pratiques */}
             {spot.info && (
                 <div className="spot-detail-info">
-                    {spot.info.prix && (
-                        <span className="info-badge">{'€'.repeat(spot.info.prix)}</span>
-                    )}
+                    {spot.info.prix && <span className="info-badge">{'€'.repeat(spot.info.prix)}</span>}
                     {spot.info.place !== null && spot.info.place !== undefined && (
                         <span className="info-badge">{spot.info.place ? '🪑 Spacieux' : '🪑 Petit'}</span>
                     )}
                     {spot.info.pc !== null && spot.info.pc !== undefined && (
                         <span className="info-badge">{spot.info.pc ? '💻 PC ok' : '💻 PC non'}</span>
                     )}
-                    {spot.info.matcha && (
-                        <span className="info-badge">🍵 {'★'.repeat(spot.info.matcha)}</span>
-                    )}
+                    {spot.info.matcha && <span className="info-badge">🍵 {'★'.repeat(spot.info.matcha)}</span>}
                     {spot.info.calme && (
-                        <span className="info-badge">{spot.info.calme >= 4 ? '🤫 Calme' : spot.info.calme >= 2 ? '💬 Moyen' : '🔊 Bruyant'}</span>
+                        <span className="info-badge">
+                            {spot.info.calme >= 4 ? '🤫 Calme' : spot.info.calme >= 2 ? '💬 Moyen' : '🔊 Bruyant'}
+                        </span>
                     )}
-                    {spot.info.originalite && (
-                        <span className="info-badge">✨ {'★'.repeat(spot.info.originalite)}</span>
-                    )}
+                    {spot.info.originalite && <span className="info-badge">✨ {'★'.repeat(spot.info.originalite)}</span>}
                 </div>
             )}
 
@@ -172,8 +194,13 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
                     </svg>
                     Voir la page du spot
                 </button>
+
                 {spot.instagram && (
-                    <a href={`https://instagram.com/${spot.instagram}`} target="_blank" rel="noreferrer" className="spot-action-btn spot-action-instagram">
+                    <a
+                        href={`https://instagram.com/${spot.instagram}`}
+                        target="_blank" rel="noreferrer"
+                        className="spot-action-btn spot-action-instagram"
+                    >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                             <circle cx="12" cy="12" r="4" />
@@ -182,6 +209,7 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
                         @{spot.instagram}
                     </a>
                 )}
+
                 <a
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + spot.address)}`}
                     target="_blank" rel="noreferrer"
@@ -198,8 +226,7 @@ function SpotDetail({ spot, onClose, isFav, onToggleFav, distance }) {
     )
 }
 
-// Composant dropdown générique
-function FilterDropdown({ label, active, open, onToggle, onClear, children }) {
+function FilterDropdown({ label, active, open, onToggle, onClear }) {
     return (
         <div className="arr-filter-row">
             <button
@@ -228,6 +255,7 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
     const [showInfoFilter, setShowInfoFilter] = useState(false)
     const [expandedId, setExpandedId] = useState(null)
     const [showFavsOnly, setShowFavsOnly] = useState(false)
+    const [openNowOnly, setOpenNowOnly] = useState(false)
     const [diceAnim, setDiceAnim] = useState(false)
     const listRef = useRef(null)
 
@@ -277,11 +305,11 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
             const matchSearch = s.name.toLowerCase().includes(search.toLowerCase())
             const matchArr = !arrFilter || getCP(s.address) === arrFilter
             const matchFav = !showFavsOnly || favIds.has(s.id)
-            return matchType && matchSearch && matchArr && matchFav
+            const matchOpen = !openNowOnly || isOpenNow(s.hours) === true
+            return matchType && matchSearch && matchArr && matchFav && matchOpen
         })
         .sort((a, b) => {
             if (userPos && a.distance != null && b.distance != null) return a.distance - b.distance
-            // Si filtres infos actifs → trier par score de correspondance
             if (hasInfoFilter) {
                 const scoreB = infoScore(b, infoFilters)
                 const scoreA = infoScore(a, infoFilters)
@@ -337,7 +365,8 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                 <p>
                     {filtered.length} spots
                     {showFavsOnly ? ' • favoris' : ''}
-                    {userPos ? ' • trié par distance' : ''}
+                    {userPos ? ' • distance' : ''}
+                    {openNowOnly ? ' • ouverts' : ''}
                     {hasInfoFilter ? ' • filtré' : ''}
                 </p>
             </div>
@@ -351,6 +380,7 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                     className="search-input"
                 />
 
+                {/* Filtres type + ouvert maintenant sur la même ligne */}
                 <div className="type-filters">
                     {TYPES.map(t => (
                         <button
@@ -361,9 +391,15 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                             {t}
                         </button>
                     ))}
+                    <button
+                        className={`filter-btn open-now-filter ${openNowOnly ? 'active' : ''}`}
+                        onClick={() => setOpenNowOnly(!openNowOnly)}
+                    >
+                        <span className={`open-now-dot ${openNowOnly ? 'active' : ''}`} />
+                        Ouvert
+                    </button>
                 </div>
 
-                {/* Filtre arrondissement */}
                 <FilterDropdown
                     label={arrFilter ? `📍 ${cpToLabel(arrFilter)}` : 'Arrondissement'}
                     active={!!arrFilter}
@@ -385,7 +421,6 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                     </div>
                 )}
 
-                {/* Filtre infos pratiques */}
                 <FilterDropdown
                     label="Infos pratiques"
                     active={hasInfoFilter}
@@ -395,105 +430,52 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
                 />
                 {showInfoFilter && (
                     <div className="info-dropdown">
-                        {/* Prix */}
                         <div className="info-filter-group">
                             <span className="info-filter-label">Prix</span>
                             <div className="info-filter-options">
                                 {[1, 2, 3].map(p => (
-                                    <button
-                                        key={p}
-                                        className={`arr-option ${infoFilters.prix === p ? 'active' : ''}`}
-                                        onClick={() => toggleInfoFilter('prix', p)}
-                                    >
+                                    <button key={p} className={`arr-option ${infoFilters.prix === p ? 'active' : ''}`} onClick={() => toggleInfoFilter('prix', p)}>
                                         {'€'.repeat(p)}
                                     </button>
                                 ))}
                             </div>
                         </div>
-
-                        {/* Place */}
                         <div className="info-filter-group">
                             <span className="info-filter-label">Place</span>
                             <div className="info-filter-options">
-                                <button
-                                    className={`arr-option ${infoFilters.place === true ? 'active' : ''}`}
-                                    onClick={() => toggleInfoFilter('place', true)}
-                                >
-                                    🪑 Spacieux
-                                </button>
-                                <button
-                                    className={`arr-option ${infoFilters.place === false ? 'active' : ''}`}
-                                    onClick={() => toggleInfoFilter('place', false)}
-                                >
-                                    🪑 Petit
-                                </button>
+                                <button className={`arr-option ${infoFilters.place === true ? 'active' : ''}`} onClick={() => toggleInfoFilter('place', true)}>🪑 Spacieux</button>
+                                <button className={`arr-option ${infoFilters.place === false ? 'active' : ''}`} onClick={() => toggleInfoFilter('place', false)}>🪑 Petit</button>
                             </div>
                         </div>
-
-                        {/* PC */}
                         <div className="info-filter-group">
                             <span className="info-filter-label">Travail au PC</span>
                             <div className="info-filter-options">
-                                <button
-                                    className={`arr-option ${infoFilters.pc === true ? 'active' : ''}`}
-                                    onClick={() => toggleInfoFilter('pc', true)}
-                                >
-                                    💻 Possible
-                                </button>
-                                <button
-                                    className={`arr-option ${infoFilters.pc === false ? 'active' : ''}`}
-                                    onClick={() => toggleInfoFilter('pc', false)}
-                                >
-                                    💻 Non
-                                </button>
+                                <button className={`arr-option ${infoFilters.pc === true ? 'active' : ''}`} onClick={() => toggleInfoFilter('pc', true)}>💻 Possible</button>
+                                <button className={`arr-option ${infoFilters.pc === false ? 'active' : ''}`} onClick={() => toggleInfoFilter('pc', false)}>💻 Non</button>
                             </div>
                         </div>
-
-                        {/* Qualité matcha */}
                         <div className="info-filter-group">
                             <span className="info-filter-label">Qualité matcha (min)</span>
                             <div className="info-filter-options">
                                 {[3, 4, 5].map(n => (
-                                    <button
-                                        key={n}
-                                        className={`arr-option ${infoFilters.matcha === n ? 'active' : ''}`}
-                                        onClick={() => toggleInfoFilter('matcha', n)}
-                                    >
+                                    <button key={n} className={`arr-option ${infoFilters.matcha === n ? 'active' : ''}`} onClick={() => toggleInfoFilter('matcha', n)}>
                                         {'★'.repeat(n)}
                                     </button>
                                 ))}
                             </div>
                         </div>
-
-                        {/* Calme */}
                         <div className="info-filter-group">
                             <span className="info-filter-label">Ambiance</span>
                             <div className="info-filter-options">
-                                <button
-                                    className={`arr-option ${infoFilters.calme === 4 ? 'active' : ''}`}
-                                    onClick={() => toggleInfoFilter('calme', 4)}
-                                >
-                                    🤫 Calme
-                                </button>
-                                <button
-                                    className={`arr-option ${infoFilters.calme === 2 ? 'active' : ''}`}
-                                    onClick={() => toggleInfoFilter('calme', 2)}
-                                >
-                                    🔊 Animé
-                                </button>
+                                <button className={`arr-option ${infoFilters.calme === 4 ? 'active' : ''}`} onClick={() => toggleInfoFilter('calme', 4)}>🤫 Calme</button>
+                                <button className={`arr-option ${infoFilters.calme === 2 ? 'active' : ''}`} onClick={() => toggleInfoFilter('calme', 2)}>🔊 Animé</button>
                             </div>
                         </div>
-
-                        {/* Originalité */}
                         <div className="info-filter-group">
                             <span className="info-filter-label">Originalité recettes (min)</span>
                             <div className="info-filter-options">
                                 {[3, 4, 5].map(n => (
-                                    <button
-                                        key={n}
-                                        className={`arr-option ${infoFilters.originalite === n ? 'active' : ''}`}
-                                        onClick={() => toggleInfoFilter('originalite', n)}
-                                    >
+                                    <button key={n} className={`arr-option ${infoFilters.originalite === n ? 'active' : ''}`} onClick={() => toggleInfoFilter('originalite', n)}>
                                         {'★'.repeat(n)}
                                     </button>
                                 ))}
@@ -506,57 +488,65 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
             <ul className="spot-list" ref={listRef}>
                 {filtered.length === 0 && (
                     <li className="spot-empty">
-                        {showFavsOnly ? "Aucun favori pour l'instant 🍵" : 'Aucun spot trouvé'}
+                        {showFavsOnly ? "Aucun favori pour l'instant 🍵" : openNowOnly ? 'Aucun spot ouvert en ce moment' : 'Aucun spot trouvé'}
                     </li>
                 )}
-                {filtered.map(spot => (
-                    <li key={spot.id}>
-                        <div
-                            data-id={spot.id}
-                            className={`spot-item ${selected?.id === spot.id ? 'active' : ''}`}
-                            onClick={() => handleItemClick(spot)}
-                        >
-                            <div className="spot-item-row">
-                                <div className="spot-name">{spot.name}</div>
-                                <div className="spot-item-actions">
-                                    <button
-                                        className="fav-btn"
-                                        onClick={e => { e.stopPropagation(); onToggleFav(spot.id) }}
-                                        title={favIds.has(spot.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
-                                    >
-                                        <HeartIcon filled={favIds.has(spot.id)} />
-                                    </button>
-                                    <svg
-                                        className={`spot-chevron ${expandedId === spot.id ? 'open' : ''}`}
-                                        width="14" height="14" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" strokeWidth="2"
-                                    >
-                                        <polyline points="6 9 12 15 18 9" />
-                                    </svg>
+                {filtered.map(spot => {
+                    const openStatus = isOpenNow(spot.hours)
+                    return (
+                        <li key={spot.id}>
+                            <div
+                                data-id={spot.id}
+                                className={`spot-item ${selected?.id === spot.id ? 'active' : ''}`}
+                                onClick={() => handleItemClick(spot)}
+                            >
+                                <div className="spot-item-row">
+                                    <div className="spot-name">{spot.name}</div>
+                                    <div className="spot-item-actions">
+                                        {openStatus !== null && (
+                                            <span
+                                                className={`spot-open-dot ${openStatus ? 'open' : 'closed'}`}
+                                                title={openStatus ? 'Ouvert' : 'Fermé'}
+                                            />
+                                        )}
+                                        <button
+                                            className="fav-btn"
+                                            onClick={e => { e.stopPropagation(); onToggleFav(spot.id) }}
+                                            title={favIds.has(spot.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                                        >
+                                            <HeartIcon filled={favIds.has(spot.id)} />
+                                        </button>
+                                        <svg
+                                            className={`spot-chevron ${expandedId === spot.id ? 'open' : ''}`}
+                                            width="14" height="14" viewBox="0 0 24 24"
+                                            fill="none" stroke="currentColor" strokeWidth="2"
+                                        >
+                                            <polyline points="6 9 12 15 18 9" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div className="spot-meta">
+                                    <span>{spot.type}</span>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        {spot.distance != null && <span className="spot-distance">{formatDistance(spot.distance)}</span>}
+                                        {spot.info?.prix && <span className="spot-prix">{'€'.repeat(spot.info.prix)}</span>}
+                                        {spot.rating && <span className="spot-rating-badge">★ {spot.rating}</span>}
+                                        {!userPos && <span className="spot-arr">{getArrondissement(spot.address)}</span>}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="spot-meta">
-                                <span>{spot.type}</span>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                    {spot.distance != null && <span className="spot-distance">{formatDistance(spot.distance)}</span>}
-                                    {spot.info?.prix && <span className="spot-prix">{'€'.repeat(spot.info.prix)}</span>}
-                                    {spot.rating && <span className="spot-rating-badge">★ {spot.rating}</span>}
-                                    {!userPos && <span className="spot-arr">{getArrondissement(spot.address)}</span>}
-                                </div>
-                            </div>
-                        </div>
-
-                        {expandedId === spot.id && (
-                            <SpotDetail
-                                spot={spot}
-                                onClose={handleClose}
-                                isFav={favIds.has(spot.id)}
-                                onToggleFav={onToggleFav}
-                                distance={spot.distance}
-                            />
-                        )}
-                    </li>
-                ))}
+                            {expandedId === spot.id && (
+                                <SpotDetail
+                                    spot={spot}
+                                    onClose={handleClose}
+                                    isFav={favIds.has(spot.id)}
+                                    onToggleFav={onToggleFav}
+                                    distance={spot.distance}
+                                />
+                            )}
+                        </li>
+                    )
+                })}
             </ul>
         </aside>
     )
