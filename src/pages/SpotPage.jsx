@@ -1,23 +1,15 @@
 // src/pages/SpotPage.jsx
 import { useParams, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { useEffect } from 'react'
 import { spots } from '../data/spots'
+import { toSlug } from '../utils/slugify'
+import { SITE_NAME, SITE_URL, SITE_IMAGE } from '../utils/seo'
 import 'leaflet/dist/leaflet.css'
 import './SpotPage.css'
 
-export function toSlug(name, address) {
-    const arr = address.match(/\d{5}/)
-    const cp = arr ? arr[0] : ''
-    return `${name} ${cp}`
-        .toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '')
-}
-
-// Icône dot identique à la carte principale
 const spotIcon = L.divIcon({
     className: '',
     html: `
@@ -72,122 +64,158 @@ export default function SpotPage() {
 
     if (!spot) {
         return (
-            <div className="spot-page-error">
-                <h1>Spot introuvable</h1>
-                <button onClick={() => navigate('/map')}>← Retour à la carte</button>
-            </div>
+            <>
+                <Helmet>
+                    <title>Spot introuvable · {SITE_NAME}</title>
+                </Helmet>
+                <div className="spot-page-error">
+                    <h1>Spot introuvable</h1>
+                    <button onClick={() => navigate('/map')}>← Retour à la carte</button>
+                </div>
+            </>
         )
     }
 
+    const pageTitle = `${spot.name} · ${spot.address.split(',')[1]?.trim() || 'Paris'} — ${SITE_NAME}`
+    const pageDesc = spot.description
+        ? spot.description
+        : `${spot.name} — ${spot.type} matcha à Paris. ${spot.rating ? `Note Google : ${spot.rating}★.` : ''} Découvrez l'adresse, les infos pratiques et notre avis.`
+    const pageUrl = `${SITE_URL}/spot/${slug}`
+
     return (
-        <div className="spot-page">
-            <header className="spot-page-header">
-                <button className="spot-page-back" onClick={() => navigate('/map')}>
-                    ← Carte
-                </button>
-                <span className="spot-page-logo">Matcha <em>Paris</em></span>
-            </header>
+        <>
+            <Helmet>
+                <title>{pageTitle}</title>
+                <meta name="description" content={pageDesc} />
 
-            <main className="spot-page-main">
-                <div className="spot-page-hero">
-                    <div className="spot-page-type">{spot.type}</div>
-                    <h1 className="spot-page-name">{spot.name}</h1>
-                    <p className="spot-page-address">{spot.address}</p>
+                {/* Open Graph */}
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={pageUrl} />
+                <meta property="og:title" content={pageTitle} />
+                <meta property="og:description" content={pageDesc} />
+                <meta property="og:image" content={SITE_IMAGE} />
+                <meta property="og:site_name" content={SITE_NAME} />
 
-                    {spot.rating && (
-                        <div className="spot-page-rating">
-                            <span className="stars">
-                                {'★'.repeat(Math.round(spot.rating))}
-                                {'☆'.repeat(5 - Math.round(spot.rating))}
-                            </span>
-                            <span className="rating-value">{spot.rating}</span>
-                            {spot.userRatingCount && (
-                                <span className="rating-count">({spot.userRatingCount} avis Google)</span>
-                            )}
-                        </div>
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={pageTitle} />
+                <meta name="twitter:description" content={pageDesc} />
+                <meta name="twitter:image" content={SITE_IMAGE} />
+
+                {/* SEO local */}
+                <meta name="geo.region" content="FR-75" />
+                <meta name="geo.placename" content="Paris" />
+            </Helmet>
+
+            <div className="spot-page">
+                <header className="spot-page-header">
+                    <button className="spot-page-back" onClick={() => navigate('/map')}>
+                        ← Carte
+                    </button>
+                    <span className="spot-page-logo">Matcha <em>Paris</em></span>
+                </header>
+
+                <main className="spot-page-main">
+                    <div className="spot-page-hero">
+                        <div className="spot-page-type">{spot.type}</div>
+                        <h1 className="spot-page-name">{spot.name}</h1>
+                        <p className="spot-page-address">{spot.address}</p>
+
+                        {spot.rating && (
+                            <div className="spot-page-rating">
+                                <span className="stars">
+                                    {'★'.repeat(Math.round(spot.rating))}
+                                    {'☆'.repeat(5 - Math.round(spot.rating))}
+                                </span>
+                                <span className="rating-value">{spot.rating}</span>
+                                {spot.userRatingCount && (
+                                    <span className="rating-count">({spot.userRatingCount} avis Google)</span>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    {spot.description && (
+                        <section className="spot-page-section">
+                            <p className="spot-page-desc">{spot.description}</p>
+                        </section>
                     )}
-                </div>
 
-                {spot.description && (
-                    <section className="spot-page-section">
-                        <p className="spot-page-desc">{spot.description}</p>
-                    </section>
-                )}
+                    {spot.tags?.length > 0 && (
+                        <section className="spot-page-section">
+                            <h2>À la carte</h2>
+                            <div className="spot-page-tags">
+                                {spot.tags.map(tag => (
+                                    <span key={tag} className="spot-page-tag">{tag}</span>
+                                ))}
+                            </div>
+                        </section>
+                    )}
 
-                {spot.tags?.length > 0 && (
-                    <section className="spot-page-section">
-                        <h2>À la carte</h2>
-                        <div className="spot-page-tags">
-                            {spot.tags.map(tag => (
-                                <span key={tag} className="spot-page-tag">{tag}</span>
-                            ))}
-                        </div>
-                    </section>
-                )}
+                    {spot.tiktok && (
+                        <section className="spot-page-section">
+                            <h2>Notre visite</h2>
+                            <div className="spot-page-tiktok">
+                                <blockquote
+                                    className="tiktok-embed"
+                                    cite={`https://www.tiktok.com/@${spot.tiktok.user}/video/${spot.tiktok.videoId}`}
+                                    data-video-id={spot.tiktok.videoId}
+                                    style={{ maxWidth: '605px', minWidth: '325px' }}
+                                >
+                                    <a href={`https://www.tiktok.com/@${spot.tiktok.user}/video/${spot.tiktok.videoId}`}>
+                                        Voir sur TikTok
+                                    </a>
+                                </blockquote>
+                                <script async src="https://www.tiktok.com/embed.js" />
+                            </div>
+                        </section>
+                    )}
 
-                {spot.tiktok && (
-                    <section className="spot-page-section">
-                        <h2>Notre visite</h2>
-                        <div className="spot-page-tiktok">
-                            <blockquote
-                                className="tiktok-embed"
-                                cite={`https://www.tiktok.com/@${spot.tiktok.user}/video/${spot.tiktok.videoId}`}
-                                data-video-id={spot.tiktok.videoId}
-                                style={{ maxWidth: '605px', minWidth: '325px' }}
-                            >
-                                <a href={`https://www.tiktok.com/@${spot.tiktok.user}/video/${spot.tiktok.videoId}`}>
-                                    Voir sur TikTok
-                                </a>
-                            </blockquote>
-                            <script async src="https://www.tiktok.com/embed.js" />
-                        </div>
-                    </section>
-                )}
-
-                <section className="spot-page-actions">
-                    <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + spot.address)}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="spot-page-btn spot-page-btn-maps"
-                    >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                            <circle cx="12" cy="9" r="2.5" />
-                        </svg>
-                        Ouvrir dans Maps
-                    </a>
-                    {spot.instagram && (
+                    <section className="spot-page-actions">
                         <a
-                            href={`https://instagram.com/${spot.instagram}`}
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + spot.address)}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="spot-page-btn spot-page-btn-instagram"
+                            className="spot-page-btn spot-page-btn-maps"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                                <circle cx="12" cy="12" r="4" />
-                                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                                <circle cx="12" cy="9" r="2.5" />
                             </svg>
-                            @{spot.instagram}
+                            Ouvrir dans Maps
                         </a>
-                    )}
-                </section>
-
-                {spot.lat && spot.lng && (
-                    <section className="spot-page-section">
-                        <h2>Localisation</h2>
-                        <div className="spot-page-map-preview">
-                            <SpotMiniMap spot={spot} />
-                        </div>
+                        {spot.instagram && (
+                            <a
+                                href={`https://instagram.com/${spot.instagram}`}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="spot-page-btn spot-page-btn-instagram"
+                            >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                    <circle cx="12" cy="12" r="4" />
+                                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                                </svg>
+                                @{spot.instagram}
+                            </a>
+                        )}
                     </section>
-                )}
-            </main>
 
-            <footer className="spot-page-footer">
-                <span>© {new Date().getFullYear()} Matcha Paris</span>
-                <button onClick={() => navigate('/map')}>Voir tous les spots →</button>
-            </footer>
-        </div>
+                    {spot.lat && spot.lng && (
+                        <section className="spot-page-section">
+                            <h2>Localisation</h2>
+                            <div className="spot-page-map-preview">
+                                <SpotMiniMap spot={spot} />
+                            </div>
+                        </section>
+                    )}
+                </main>
+
+                <footer className="spot-page-footer">
+                    <span>© {new Date().getFullYear()} Matcha Paris</span>
+                    <button onClick={() => navigate('/map')}>Voir tous les spots →</button>
+                </footer>
+            </div>
+        </>
     )
 }

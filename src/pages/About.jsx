@@ -36,13 +36,13 @@ export default function About() {
                     <div className="about-team">
                         <div className="about-member">
                             <div className="about-avatar" />
-                            <h3>[Prénom]</h3>
-                            <p>[Rôle / description]</p>
+                            <h3>Débora Asséré</h3>
+                            <p>Directrice Artisitique</p>
                         </div>
                         <div className="about-member">
                             <div className="about-avatar" />
-                            <h3>[Prénom]</h3>
-                            <p>[Rôle / description]</p>
+                            <h3>Aurian Baudet</h3>
+                            <p>Développeur</p>
                         </div>
                     </div>
                 </section>
