@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       {
         headers: {
           'X-Goog-Api-Key': apiKey,
-          'X-Goog-FieldMask': 'rating,userRatingCount,currentOpeningHours,googleMapsUri,photos',
+          'X-Goog-FieldMask': 'rating,userRatingCount,regularOpeningHours,googleMapsUri,photos',
         },
       }
     )

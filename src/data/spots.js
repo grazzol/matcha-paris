@@ -1464,7 +1464,7 @@ export const spots = [
         placeId: 'ChIJi30H_S5x5kcRdesf9XehB0E',
         tags: ['matcha'],
         description: '',
-        instagram: '',
+        instagram: 'central_cos_cafe',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1487,7 +1487,7 @@ export const spots = [
         placeId: 'ChIJ7aGfqxNz5kcRoEZWjlxrkiM',
         tags: ['matcha', 'coffee'],
         description: '',
-        instagram: '',
+        instagram: 'latteclub.studio',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1510,7 +1510,7 @@ export const spots = [
         placeId: 'ChIJt5WAZxpz5kcRwzN4RZzlXLc',
         tags: ['matcha'],
         description: '',
-        instagram: '',
+        instagram: 'mokanova.paris',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1533,7 +1533,7 @@ export const spots = [
         placeId: 'ChIJJbHJeCht5kcR8LGr5NUrEBw',
         tags: ['matcha'],
         description: '',
-        instagram: '',
+        instagram: 'kottcafe',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1556,7 +1556,7 @@ export const spots = [
         placeId: 'ChIJVbSggBRt5kcRAc4_TWA7nro',
         tags: ['matcha'],
         description: '',
-        instagram: '',
+        instagram: 'nolyscake.paris',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1579,7 +1579,7 @@ export const spots = [
         placeId: 'ChIJhcjy0Uht5kcR4TA8ESeSgy4',
         tags: ['matcha', 'thé'],
         description: '',
-        instagram: '',
+        instagram: 'lete.maison',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1602,7 +1602,7 @@ export const spots = [
         placeId: 'ChIJMQNBUgBt5kcRP6MVnKnlWtE',
         tags: ['matcha'],
         description: '',
-        instagram: '',
+        instagram: 'noacafeparis',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1625,7 +1625,7 @@ export const spots = [
         placeId: 'ChIJW8IbscNt5kcRztRvGfZM1OM',
         tags: ['matcha', 'coffee'],
         description: '',
-        instagram: '',
+        instagram: 'legacycoffee.fr',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1671,7 +1671,7 @@ export const spots = [
         placeId: 'ChIJeZswDnZt5kcRWQ1Vui9tILE',
         tags: ['matcha', 'coffee'],
         description: '',
-        instagram: '',
+        instagram: 'kokocafeparis',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1694,7 +1694,7 @@ export const spots = [
         placeId: 'ChIJLyapB89v5kcRdwp4pZQ942k',
         tags: ['matcha', 'thé'],
         description: '',
-        instagram: '',
+        instagram: 'angeliquepariscafe',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
@@ -1740,7 +1740,7 @@ export const spots = [
         placeId: 'ChIJ8xOaEGZv5kcRAfcu-EkkKr4',
         tags: ['matcha'],
         description: '',
-        instagram: '',
+        instagram: 'matcha_room_paris',
         tiktok: null,
         info: {
             prix: 2,          // 1 = €, 2 = €€, 3 = €€€, null = non renseigné
