@@ -25,8 +25,13 @@ export default function About() {
                 <section className="about-section">
                     <div className="about-eyebrow">Notre vision</div>
                     <h1 className="about-title">À propos</h1>
-                    <p className="about-text about-placeholder">
-                        [Votre mission en quelques lignes]
+                    <p className="about-placeholder">
+
+                        <div className="about-text">
+                            <p>Oui, on sait déjà que le matcha c'est une boisson avec plein de bienfaits pour la santé.</p>
+                            <p>Mais pour nous c'est plus que ça, c'est une boisson qui illumine ton mood, te lance dans ta journée, te rafraichit en été, te réconforte en hiver… C'est aussi une boisson qui peut prendre différentes formes (mangue coco pour les nostalgiques de l'été, fraise pour les girlies… en shot pour les plus aventuriers).</p>
+                            <p>Et puis aller dans un coffee shop pour un matcha c'est une manière de reconnecter avec tes potes, rencontrer de nouvelles personnes, te recentrer, t'avancer sur du travail et trouver du calme dans une ville bruyante. C'est un appel à retourner à la simplicité et ce qui est essentiel.</p>
+                        </div>
                     </p>
                 </section>
 
