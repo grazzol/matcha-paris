@@ -136,6 +136,35 @@ export default function SpotPage() {
                         )}
                     </div>
 
+                    {spot.info && (
+                        <section className="spot-page-section">
+                            <h2>Infos pratiques</h2>
+                            <div className="spot-page-info">
+                                {spot.info.prix && (
+                                    <span className="spot-page-info-badge">{'€'.repeat(spot.info.prix)}</span>
+                                )}
+                                {spot.info.place !== null && spot.info.place !== undefined && (
+                                    <span className="spot-page-info-badge">{spot.info.place ? '🪑 Spacieux' : '🪑 Petit'}</span>
+                                )}
+                                {spot.info.pc !== null && spot.info.pc !== undefined && (
+                                    <span className="spot-page-info-badge">{spot.info.pc ? '💻 PC ok' : '💻 PC non'}</span>
+                                )}
+                                {spot.info.matcha && (
+                                    <span className="spot-page-info-badge">🍵 {'★'.repeat(spot.info.matcha)}</span>
+                                )}
+                                {spot.info.calme && (
+                                    <span className="spot-page-info-badge">
+                                        {spot.info.calme >= 4 ? '🤫 Calme' : spot.info.calme >= 2 ? '💬 Moyen' : '🔊 Bruyant'}
+                                    </span>
+                                )}
+                                {spot.info.originalite && (
+                                    <span className="spot-page-info-badge">✨ {'★'.repeat(spot.info.originalite)}</span>
+                                )}
+                            </div>
+                        </section>
+                    )}
+
+
                     {(() => {
                         const open = isOpenNow(spot.hours)
                         const closeTime = open ? getCloseTime(spot.hours) : null

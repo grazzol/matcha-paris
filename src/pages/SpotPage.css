@@ -332,3 +332,18 @@
         background-position: -200% 0;
     }
 }
+
+.spot-page-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.spot-page-info-badge {
+    background: rgba(74, 124, 89, 0.1);
+    color: var(--sage-accent-dk, #2c4a32);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(74, 124, 89, 0.2);
+}
