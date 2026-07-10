@@ -286,3 +286,49 @@
 .spot-open-status.closed .open-dot {
     background: #ccc;
 }
+
+.tiktok-wrapper {
+    position: relative;
+    width: 325px;
+    height: 580px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    isolation: isolate;
+}
+
+.tiktok-skeleton {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(90deg,
+            rgba(44, 74, 50, 0.15) 25%,
+            rgba(44, 74, 50, 0.25) 50%,
+            rgba(44, 74, 50, 0.15) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.tiktok-wrapper .tiktok-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    margin: 0 !important;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}

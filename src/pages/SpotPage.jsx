@@ -191,17 +191,24 @@ export default function SpotPage() {
                         <section className="spot-page-section">
                             <h2>Notre visite</h2>
                             <div className="spot-page-tiktok">
-                                <blockquote
-                                    className="tiktok-embed"
-                                    cite={`https://www.tiktok.com/@${spot.tiktok.user}/video/${spot.tiktok.videoId}`}
-                                    data-video-id={spot.tiktok.videoId}
-                                    style={{ maxWidth: '605px', minWidth: '325px' }}
-                                >
-                                    <a href={`https://www.tiktok.com/@${spot.tiktok.user}/video/${spot.tiktok.videoId}`}>
-                                        Voir sur TikTok
-                                    </a>
-                                </blockquote>
-                                <script async src="https://www.tiktok.com/embed.js" />
+                                <div className="tiktok-wrapper">
+                                    <div className="tiktok-skeleton" id={`skeleton-${spot.tiktok.videoId}`} />
+                                    <blockquote
+                                        className="tiktok-embed"
+                                        cite={`https://www.tiktok.com/@${spot.tiktok.user}/video/${spot.tiktok.videoId}`}
+                                        data-video-id={spot.tiktok.videoId}
+                                        style={{ maxWidth: '605px', minWidth: '325px' }}
+                                        onLoad={() => {
+                                            const sk = document.getElementById(`skeleton-${spot.tiktok.videoId}`)
+                                            if (sk) sk.style.display = 'none'
+                                        }}
+                                    >
+                                        <a href={`https://www.tiktok.com/@${spot.tiktok.user}/video/${spot.tiktok.videoId}`}>
+                                            Voir sur TikTok
+                                        </a>
+                                    </blockquote>
+                                    <script async src="https://www.tiktok.com/embed.js" />
+                                </div>
                             </div>
                         </section>
                     )}

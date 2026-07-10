@@ -35,12 +35,12 @@ export default function About() {
                     <div className="about-eyebrow">L'équipe</div>
                     <div className="about-team">
                         <div className="about-member">
-                            <div className="about-avatar" />
+                            <img src="/team/pp-debora.png" alt="Prénom 2" className="about-avatar" />
                             <h3>Débora Asséré</h3>
                             <p>Directrice Artisitique</p>
                         </div>
                         <div className="about-member">
-                            <div className="about-avatar" />
+                            <img src="/team/pp-aurian.png" alt="Prénom 1" className="about-avatar" />
                             <h3>Aurian Baudet</h3>
                             <p>Développeur</p>
                         </div>
