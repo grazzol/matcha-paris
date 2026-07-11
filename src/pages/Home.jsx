@@ -1,12 +1,21 @@
 // src/pages/Home.jsx
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL, SITE_IMAGE } from '../utils/seo'
-import './Home.css'
 import { spots } from '../data/spots'
+import Noren from '../components/Noren'
+import './Home.css'
 
 export default function Home() {
     const navigate = useNavigate()
+
+    const [norenDone, setNorenDone] = useState(false)
+
+    const handleNorenComplete = () => {
+        setNorenDone(true)
+    }
+
 
     const totalSpots = spots.length
     const totalEnseignes = new Set(spots.map(s => s.name)).size
@@ -19,20 +28,21 @@ export default function Home() {
             <Helmet>
                 <title>{SITE_NAME} — Trouve ton matcha à Paris</title>
                 <meta name="description" content={SITE_DESCRIPTION} />
-
                 {/* Open Graph */}
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content={SITE_URL} />
                 <meta property="og:title" content={`${SITE_NAME} — Trouve ton matcha à Paris`} />
                 <meta property="og:description" content={SITE_DESCRIPTION} />
                 <meta property="og:image" content={SITE_IMAGE} />
-
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={`${SITE_NAME} — Trouve ton matcha à Paris`} />
                 <meta name="twitter:description" content={SITE_DESCRIPTION} />
                 <meta name="twitter:image" content={SITE_IMAGE} />
             </Helmet>
+
+            {/* Animation noren — une fois par session */}
+            {!norenDone && <Noren onComplete={handleNorenComplete} />}
 
             <div className="home">
                 <div className="home-bg">

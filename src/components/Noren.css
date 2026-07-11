@@ -1,0 +1,156 @@
+/* src/components/Noren.css */
+
+.noren-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: stretch;
+    pointer-events: all;
+}
+
+/* Barre du haut — tringle en bois */
+.noren-rod {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 18px;
+    background: linear-gradient(180deg, #3a2a1a 0%, #5c3d1e 60%, #3a2a1a 100%);
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Panneaux */
+.noren-panel {
+    flex: 1;
+    position: relative;
+    background: #1a2e1e;
+    transition: transform 1.6s cubic-bezier(0.76, 0, 0.24, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.noren-left {
+    transform: translateX(0);
+    border-right: 2px solid rgba(200, 219, 194, 0.15);
+}
+
+.noren-right {
+    transform: translateX(0);
+    border-left: 2px solid rgba(200, 219, 194, 0.15);
+}
+
+/* Animation d'ouverture */
+.noren-overlay.opening .noren-left {
+    transform: translateX(-100%);
+}
+
+.noren-overlay.opening .noren-right {
+    transform: translateX(100%);
+}
+
+/* Texture tissu subtile */
+.noren-texture {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 3px,
+            rgba(255, 255, 255, 0.015) 3px,
+            rgba(255, 255, 255, 0.015) 4px),
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 8px,
+            rgba(255, 255, 255, 0.01) 8px,
+            rgba(255, 255, 255, 0.01) 9px);
+    pointer-events: none;
+}
+
+/* Caractères japonais */
+.noren-kanji {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(48px, 10vw, 96px);
+    font-weight: 300;
+    color: rgba(200, 219, 194, 0.25);
+    letter-spacing: 0.1em;
+    user-select: none;
+    margin-bottom: 80px;
+}
+
+/* Photos en bas des panneaux — style tabi */
+.noren-tabi {
+    position: absolute;
+    bottom: 0;
+    width: 90px;
+    height: 90px;
+}
+
+.noren-tabi-left {
+    right: 16px;
+    transform: none;
+}
+
+.noren-tabi-right {
+    left: 16px;
+    transform: none;
+}
+
+.noren-tabi img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: contain;
+    border: 3px solid #1a2e1e;
+    display: block;
+}
+
+/* Titre central */
+.noren-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 3;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.noren-title.fade-out {
+    opacity: 0;
+}
+
+.noren-title-main {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 300;
+    color: #f5f2ec;
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+.noren-title-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 300;
+    font-style: italic;
+    color: #c8dbc2;
+    letter-spacing: 0.08em;
+}
+
+/* Ligne décorative sous le titre */
+.noren-title::after {
+    content: '— 抹茶 —';
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(200, 219, 194, 0.4);
+    margin-top: 8px;
+    font-family: 'DM Sans', sans-serif;
+}
