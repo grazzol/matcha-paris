@@ -11,6 +11,7 @@ import '../App.css'
 export default function MapPage() {
     const [selected, setSelected] = useState(null)
     const [drawerOpen, setDrawerOpen] = useState(false)
+    const [drawerFull, setDrawerFull] = useState(false)
     const [favIds, setFavIds] = useState(() => {
         try {
             return new Set(JSON.parse(localStorage.getItem('matcha-favs') || '[]'))
@@ -18,9 +19,9 @@ export default function MapPage() {
     })
     const [userPos, setUserPos] = useState(null)
     const [locating, setLocating] = useState(false)
-    const navigate = useNavigate()
     const [touchStart, setTouchStart] = useState(null)
     const [touchEnd, setTouchEnd] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         localStorage.setItem('matcha-favs', JSON.stringify([...favIds]))
@@ -36,7 +37,6 @@ export default function MapPage() {
 
     const handleLocate = () => {
         if (!navigator.geolocation) return
-        // Si déjà localisé → reset
         if (userPos) {
             setUserPos(null)
             return
@@ -57,6 +57,24 @@ export default function MapPage() {
 
     const handleSelect = (spot) => {
         setSelected(spot)
+        if (spot) setDrawerFull(true)
+    }
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) return
+        const distance = touchEnd - touchStart
+        if (distance > 80) {
+            // Swipe bas
+            if (drawerFull) setDrawerFull(false)
+            else setDrawerOpen(false)
+        }
+        if (distance < -80) {
+            // Swipe haut
+            if (drawerOpen) setDrawerFull(true)
+            else setDrawerOpen(true)
+        }
+        setTouchStart(null)
+        setTouchEnd(null)
     }
 
     const sidebarProps = {
@@ -68,22 +86,6 @@ export default function MapPage() {
         userPos,
         onLocate: handleLocate,
         locating,
-    }
-
-    const handleTouchStart = (e) => {
-        setTouchStart(e.targetTouches[0].clientY)
-    }
-
-    const handleTouchMove = (e) => {
-        setTouchEnd(e.targetTouches[0].clientY)
-    }
-
-    const handleTouchEnd = () => {
-        if (!touchStart || !touchEnd) return
-        const distance = touchEnd - touchStart
-        if (distance > 80) setDrawerOpen(false) // swipe vers le bas > 80px
-        setTouchStart(null)
-        setTouchEnd(null)
     }
 
     return (
@@ -103,20 +105,21 @@ export default function MapPage() {
                 <Footer />
             </div>
 
-            <div className={`drawer-overlay ${drawerOpen ? 'open' : ''}`} onClick={() => setDrawerOpen(false)} />
             <div
-                className={`drawer ${drawerOpen ? 'open' : ''}`}
+                className={`drawer-overlay ${drawerOpen ? 'open' : ''}`}
+                onClick={() => { setDrawerOpen(false); setDrawerFull(false) }}
+            />
+            <div
+                className={`drawer ${drawerOpen ? 'open' : ''} ${drawerFull ? 'full' : ''}`}
                 onTouchStart={e => setTouchStart(e.targetTouches[0].clientY)}
                 onTouchMove={e => setTouchEnd(e.targetTouches[0].clientY)}
-                onTouchEnd={() => {
-                    if (touchStart && touchEnd && touchEnd - touchStart > 80) {
-                        setDrawerOpen(false)
-                    }
-                    setTouchStart(null)
-                    setTouchEnd(null)
-                }}
+                onTouchEnd={handleTouchEnd}
             >
-                <div className="drawer-handle" onClick={() => setDrawerOpen(!drawerOpen)}>
+                <div className="drawer-handle" onClick={() => {
+                    if (!drawerOpen) setDrawerOpen(true)
+                    else if (!drawerFull) setDrawerFull(true)
+                    else { setDrawerFull(false); setDrawerOpen(false) }
+                }}>
                     <div className="drawer-pill" />
                 </div>
                 <Sidebar {...sidebarProps} className="sidebar-mobile" />
