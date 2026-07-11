@@ -319,8 +319,13 @@ export default function Sidebar({ spots, onSelect, selected, className, favIds, 
         })
 
     const handleItemClick = (spot) => {
-        onSelect(spot)
-        setExpandedId(expandedId === spot.id ? null : spot.id)
+        if (expandedId === spot.id) {
+            // Déjà ouvert — ferme sans désélectionner sur la carte
+            setExpandedId(null)
+        } else {
+            onSelect(spot)
+            setExpandedId(spot.id)
+        }
     }
 
     const handleClose = () => {

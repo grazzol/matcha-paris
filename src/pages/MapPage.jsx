@@ -19,6 +19,8 @@ export default function MapPage() {
     const [userPos, setUserPos] = useState(null)
     const [locating, setLocating] = useState(false)
     const navigate = useNavigate()
+    const [touchStart, setTouchStart] = useState(null)
+    const [touchEnd, setTouchEnd] = useState(null)
 
     useEffect(() => {
         localStorage.setItem('matcha-favs', JSON.stringify([...favIds]))
@@ -68,6 +70,22 @@ export default function MapPage() {
         locating,
     }
 
+    const handleTouchStart = (e) => {
+        setTouchStart(e.targetTouches[0].clientY)
+    }
+
+    const handleTouchMove = (e) => {
+        setTouchEnd(e.targetTouches[0].clientY)
+    }
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) return
+        const distance = touchEnd - touchStart
+        if (distance > 80) setDrawerOpen(false) // swipe vers le bas > 80px
+        setTouchStart(null)
+        setTouchEnd(null)
+    }
+
     return (
         <div className="layout">
             <Sidebar {...sidebarProps} className="sidebar-desktop" />
@@ -86,14 +104,30 @@ export default function MapPage() {
             </div>
 
             <div className={`drawer-overlay ${drawerOpen ? 'open' : ''}`} onClick={() => setDrawerOpen(false)} />
-            <div className={`drawer ${drawerOpen ? 'open' : ''}`}>
+            <div
+                className={`drawer ${drawerOpen ? 'open' : ''}`}
+                onTouchStart={e => setTouchStart(e.targetTouches[0].clientY)}
+                onTouchMove={e => setTouchEnd(e.targetTouches[0].clientY)}
+                onTouchEnd={() => {
+                    if (touchStart && touchEnd && touchEnd - touchStart > 80) {
+                        setDrawerOpen(false)
+                    }
+                    setTouchStart(null)
+                    setTouchEnd(null)
+                }}
+            >
                 <div className="drawer-handle" onClick={() => setDrawerOpen(!drawerOpen)}>
                     <div className="drawer-pill" />
                 </div>
                 <Sidebar {...sidebarProps} className="sidebar-mobile" />
             </div>
 
-            <button className="fab" onClick={() => setDrawerOpen(true)} aria-label="Voir la liste">
+            <button
+                className="fab"
+                onClick={() => setDrawerOpen(true)}
+                aria-label="Voir la liste"
+                style={{ display: drawerOpen ? 'none' : 'flex' }}
+            >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="3" y1="6" x2="21" y2="6" />
                     <line x1="3" y1="12" x2="21" y2="12" />

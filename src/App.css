@@ -210,6 +210,8 @@ body,
 .spot-list {
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
+  /* ← crucial sur mobile */
   list-style: none;
   scrollbar-width: thin;
   scrollbar-color: var(--sage-border) transparent;
@@ -623,6 +625,9 @@ body,
 
 /* La sidebar dans le drawer prend toute la hauteur */
 .drawer .sidebar {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: calc(75dvh - 24px);
   border-right: none;
@@ -631,6 +636,11 @@ body,
 
 .drawer .sidebar-header {
   padding: 0.75rem 1.25rem 0.6rem;
+}
+
+.drawer .sidebar-filters {
+  flex-shrink: 0;
+  /* les filtres ne se compressent pas */
 }
 
 /* FAB — bouton flottant liste */
@@ -1083,7 +1093,7 @@ body,
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 260px;
+  max-height: 220px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--sage-border) transparent;
@@ -1131,6 +1141,12 @@ body,
   font-size: 11px;
   padding: 3px 9px;
   border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .info-dropdown {
+    max-height: 160px;
+  }
 }
 
 .spot-prix {
