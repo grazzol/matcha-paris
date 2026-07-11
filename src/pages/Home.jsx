@@ -3,9 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL, SITE_IMAGE } from '../utils/seo'
 import './Home.css'
+import { spots } from '../data/spots'
 
 export default function Home() {
     const navigate = useNavigate()
+
+    const totalSpots = spots.length
+    const totalEnseignes = new Set(spots.map(s => s.name)).size
+    const totalArrondissements = new Set(
+        spots.map(s => s.address.match(/7[45]\d{3}|92200|93400/)?.[0]).filter(Boolean)
+    ).size
 
     return (
         <>
@@ -44,7 +51,7 @@ export default function Home() {
                     </h1>
 
                     <p className="home-subtitle">
-                        120+ adresses curatées — cafés, salons de thé.
+                        {totalSpots} adresses curatées — cafés, salons de thé.
                         <br />Filtre, explore, découvre.
                     </p>
 
@@ -61,18 +68,18 @@ export default function Home() {
 
                     <div className="home-stats">
                         <div className="stat">
-                            <span className="stat-n">120+</span>
+                            <span className="stat-n">{totalSpots}</span>
                             <span className="stat-l">adresses</span>
                         </div>
                         <div className="stat-divider" />
                         <div className="stat">
-                            <span className="stat-n">20</span>
+                            <span className="stat-n">{totalEnseignes}</span>
                             <span className="stat-l">enseignes</span>
                         </div>
                         <div className="stat-divider" />
                         <div className="stat">
-                            <span className="stat-n">20</span>
-                            <span className="stat-l">arrondissements</span>
+                            <span className="stat-n">{totalArrondissements}</span>
+                            <span className="stat-l">secteurs</span>
                         </div>
                     </div>
                 </main>
