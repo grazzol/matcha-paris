@@ -55,7 +55,6 @@ export default function MapPage() {
 
     const handleSelect = (spot) => {
         setSelected(spot)
-        setDrawerOpen(false)
     }
 
     const sidebarProps = {

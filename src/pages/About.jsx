@@ -23,8 +23,8 @@ export default function About() {
 
                 {/* Vision */}
                 <section className="about-section">
-                    <div className="about-eyebrow">Notre vision</div>
-                    <h1 className="about-title">À propos</h1>
+                    <div className="about-eyebrow">À propos</div>
+                    <h1 className="about-title">Notre vision</h1>
                     <p className="about-placeholder">
 
                         <div className="about-text">
