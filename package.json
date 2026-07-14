@@ -16,6 +16,7 @@
     "dotenv": "^17.4.2",
     "leaflet": "^1.9.4",
     "mongodb": "^6.21.0",
+    "mongoose": "^9.7.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-helmet-async": "^3.0.0",

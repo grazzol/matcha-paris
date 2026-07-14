@@ -1,28 +1,16 @@
-import clientPromise from '../lib/db.mjs'
+import connectDB from '../lib/db.mjs'
+import mongoose from 'mongoose'
 
-const ALLOWED_ORIGINS = [
-    'https://matcha-paris.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:4000',
-]
-
-function isAllowed(req) {
-    const origin = req.headers.origin || req.headers.referer || ''
-    return ALLOWED_ORIGINS.some(o => origin.startsWith(o))
-}
+const SpotSchema = new mongoose.Schema({}, { strict: false })
+const Spot = mongoose.models.spots || mongoose.model('spots', SpotSchema)
 
 export default async function handler(req, res) {
-    // if (!isAllowed(req)) {
-    //     return res.status(403).json({ error: 'Accès refusé' })
-    // }
-
     try {
-        const client = await clientPromise
-        const db = client.db('matcha')
-        const spots = await db.collection('spots').find({}).toArray()
+        await connectDB()
+        const spots = await Spot.find({}).lean()
         res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate')
         res.status(200).json(spots)
     } catch (error) {
-        res.status(500).json({ error: 'Erreur base de données', details: error.message })
+        res.status(500).json({ error: 'Erreur', details: error.message })
     }
 }
