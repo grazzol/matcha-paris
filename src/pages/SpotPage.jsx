@@ -4,12 +4,12 @@ import { Helmet } from 'react-helmet-async'
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { useEffect } from 'react'
-import { spots } from '../data/spots'
+import { useSpots } from '../hooks/useSpots'
 import { toSlug } from '../utils/slugify'
 import { SITE_NAME, SITE_URL, SITE_IMAGE } from '../utils/seo'
+import { isOpenNow, getCloseTime, getWeeklyHours } from '../utils/isOpen'
 import 'leaflet/dist/leaflet.css'
 import './SpotPage.css'
-import { isOpenNow, getCloseTime, getWeeklyHours } from '../utils/isOpen'
 
 const spotIcon = L.divIcon({
     className: '',
@@ -60,6 +60,18 @@ function SpotMiniMap({ spot }) {
 export default function SpotPage() {
     const { slug } = useParams()
     const navigate = useNavigate()
+    const { spots, loading } = useSpots()
+
+    if (loading) return (
+        <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            height: '100vh', background: '#1a2e1e', color: '#c8dbc2',
+            fontFamily: 'Cormorant Garamond, serif', fontSize: '28px', fontWeight: 300,
+            letterSpacing: '0.05em'
+        }}>
+            Chargement...
+        </div>
+    )
 
     const spot = spots.find(s => toSlug(s.name, s.address) === slug)
 
@@ -83,27 +95,26 @@ export default function SpotPage() {
         : `${spot.name} — ${spot.type} matcha à Paris. ${spot.rating ? `Note Google : ${spot.rating}★.` : ''} Découvrez l'adresse, les infos pratiques et notre avis.`
     const pageUrl = `${SITE_URL}/spot/${slug}`
 
+    const open = isOpenNow(spot.hours)
+    const closeTime = open ? getCloseTime(spot.hours) : null
+    const weekly = getWeeklyHours(spot.hours)
+    const today = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1
+
     return (
         <>
             <Helmet>
                 <title>{pageTitle}</title>
                 <meta name="description" content={pageDesc} />
-
-                {/* Open Graph */}
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content={pageTitle} />
                 <meta property="og:description" content={pageDesc} />
                 <meta property="og:image" content={SITE_IMAGE} />
                 <meta property="og:site_name" content={SITE_NAME} />
-
-                {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={pageTitle} />
                 <meta name="twitter:description" content={pageDesc} />
                 <meta name="twitter:image" content={SITE_IMAGE} />
-
-                {/* SEO local */}
                 <meta name="geo.region" content="FR-75" />
                 <meta name="geo.placename" content="Paris" />
             </Helmet>
@@ -164,40 +175,29 @@ export default function SpotPage() {
                         </section>
                     )}
 
+                    {open !== null && (
+                        <div className={`spot-open-status ${open ? 'open' : 'closed'}`}>
+                            <span className="open-dot" />
+                            {open
+                                ? `Ouvert${closeTime ? ` · ferme à ${closeTime}` : ''}`
+                                : 'Fermé'
+                            }
+                        </div>
+                    )}
 
-                    {(() => {
-                        const open = isOpenNow(spot.hours)
-                        const closeTime = open ? getCloseTime(spot.hours) : null
-                        const weekly = getWeeklyHours(spot.hours)
-                        const today = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1
-
-                        return (
-                            <>
-                                {open !== null && (
-                                    <div className={`spot-open-status ${open ? 'open' : 'closed'}`}>
-                                        <span className="open-dot" />
-                                        {open
-                                            ? `Ouvert${closeTime ? ` · ferme à ${closeTime}` : ''}`
-                                            : 'Fermé'
-                                        }
+                    {weekly && (
+                        <section className="spot-page-section">
+                            <h2>Horaires</h2>
+                            <div className="spot-hours-table">
+                                {weekly.map((d, i) => (
+                                    <div key={d.label} className={`hours-row ${i === today ? 'today' : ''}`}>
+                                        <span className="hours-day">{d.label}</span>
+                                        <span className={`hours-value ${d.closed ? 'closed' : ''}`}>{d.value}</span>
                                     </div>
-                                )}
-                                {weekly && (
-                                    <section className="spot-page-section">
-                                        <h2>Horaires</h2>
-                                        <div className="spot-hours-table">
-                                            {weekly.map((d, i) => (
-                                                <div key={d.label} className={`hours-row ${i === today ? 'today' : ''}`}>
-                                                    <span className="hours-day">{d.label}</span>
-                                                    <span className={`hours-value ${d.closed ? 'closed' : ''}`}>{d.value}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </section>
-                                )}
-                            </>
-                        )
-                    })()}
+                                ))}
+                            </div>
+                        </section>
+                    )}
 
                     {spot.description && (
                         <section className="spot-page-section">

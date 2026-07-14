@@ -5,10 +5,11 @@ import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
 import Map from '../components/Map'
 import SuggestSpot from '../components/SuggestSpot'
-import { spots } from '../data/spots'
+import { useSpots } from '../hooks/useSpots'
 import '../App.css'
 
 export default function MapPage() {
+    const { spots, loading, error } = useSpots()
     const [selected, setSelected] = useState(null)
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [drawerFull, setDrawerFull] = useState(false)
@@ -64,18 +65,37 @@ export default function MapPage() {
         if (!touchStart || !touchEnd) return
         const distance = touchEnd - touchStart
         if (distance > 80) {
-            // Swipe bas
             if (drawerFull) setDrawerFull(false)
             else setDrawerOpen(false)
         }
         if (distance < -80) {
-            // Swipe haut
             if (drawerOpen) setDrawerFull(true)
             else setDrawerOpen(true)
         }
         setTouchStart(null)
         setTouchEnd(null)
     }
+
+    if (loading) return (
+        <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            height: '100vh', background: '#1a2e1e', color: '#c8dbc2',
+            fontFamily: 'Cormorant Garamond, serif', fontSize: '28px',
+            fontWeight: 300, letterSpacing: '0.05em'
+        }}>
+            Chargement des spots...
+        </div>
+    )
+
+    if (error) return (
+        <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            height: '100vh', background: '#1a2e1e', color: '#e85d6a',
+            fontFamily: 'DM Sans, sans-serif', fontSize: '14px'
+        }}>
+            Erreur : {error}
+        </div>
+    )
 
     const sidebarProps = {
         spots,
