@@ -1,13 +1,23 @@
-import connectDB from '../lib/db.mjs'
-import mongoose from 'mongoose'
-
-const SpotSchema = new mongoose.Schema({}, { strict: false })
-const Spot = mongoose.models.spots || mongoose.model('spots', SpotSchema)
-
+// api/spots.mjs
 export default async function handler(req, res) {
     try {
-        await connectDB()
-        const spots = await Spot.find({}).lean()
+        const response = await fetch(
+            `${process.env.SUPABASE_URL}/rest/v1/spots?select=*&order=name`,
+            {
+                headers: {
+                    'apikey': process.env.SUPABASE_ANON_KEY,
+                    'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
+                    'Content-Type': 'application/json',
+                }
+            }
+        )
+
+        if (!response.ok) {
+            const err = await response.text()
+            return res.status(response.status).json({ error: err })
+        }
+
+        const spots = await response.json()
         res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate')
         res.status(200).json(spots)
     } catch (error) {
