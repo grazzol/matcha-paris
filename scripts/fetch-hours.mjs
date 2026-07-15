@@ -1,10 +1,21 @@
 // scripts/fetch-hours.mjs
+// Récupère les horaires via Google Places et met à jour Supabase
 // Lance avec : node scripts/fetch-hours.mjs
 
-import fs from 'fs'
-import { spots } from '../src/data/spots.js'
+import { createClient } from '@supabase/supabase-js'
+import * as dotenv from 'dotenv'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+dotenv.config({ path: join(__dirname, '../.env.local') })
 
 const VERCEL_URL = 'https://matcha-paris.vercel.app'
+
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_KEY
+)
 
 function sleep(ms) {
     return new Promise(r => setTimeout(r, ms))
@@ -14,10 +25,8 @@ async function fetchHours(placeId) {
     const url = `${VERCEL_URL}/api/place-details?placeId=${placeId}`
     const res = await fetch(url)
     const data = await res.json()
-
     const oh = data.regularOpeningHours
     if (!oh?.periods) return null
-
     return oh.periods.map(p => ({
         open: { day: p.open.day, hour: p.open.hour, minute: p.open.minute },
         close: p.close ? { day: p.close.day, hour: p.close.hour, minute: p.close.minute } : null,
@@ -25,78 +34,49 @@ async function fetchHours(placeId) {
 }
 
 async function main() {
-    const results = []
+    // Récupère tous les spots avec un placeId depuis Supabase
+    const { data: spots, error } = await supabase
+        .from('spots')
+        .select('id, name, "placeId"')
+        .not('placeId', 'is', null)
+        .order('id')
+
+    if (error) {
+        console.error('❌ Erreur lecture Supabase :', error.message)
+        process.exit(1)
+    }
+
+    console.log(`📦 ${spots.length} spots avec placeId à traiter...`)
+
+    let found = 0
 
     for (let i = 0; i < spots.length; i++) {
         const spot = spots[i]
-
-        if (!spot.placeId) {
-            results.push({ ...spot, hours: null })
-            console.log(`[${String(i + 1).padStart(3, '0')}/${spots.length}] ✗ pas de placeId — ${spot.name}`)
-            continue
-        }
-
         process.stdout.write(`[${String(i + 1).padStart(3, '0')}/${spots.length}] ${spot.name} ... `)
 
         try {
             const hours = await fetchHours(spot.placeId)
-            results.push({ ...spot, hours })
-            console.log(hours ? `✓ ${hours.length} plages` : '✗ non disponible')
+
+            if (hours) {
+                const { error: updateError } = await supabase
+                    .from('spots')
+                    .update({ hours })
+                    .eq('id', spot.id)
+
+                if (updateError) throw new Error(updateError.message)
+                found++
+                console.log(`✓ ${hours.length} plages`)
+            } else {
+                console.log('✗ non disponible')
+            }
         } catch (e) {
-            results.push({ ...spot, hours: null })
             console.log(`✗ erreur: ${e.message}`)
         }
 
         await sleep(350)
     }
 
-    const lines = results.map(s => {
-        const tagsStr = s.tags.map(t => `'${t.replace(/'/g, "\\'")}'`).join(', ')
-
-        const hoursStr = s.hours
-            ? `[\n${s.hours.map(p => {
-                const close = p.close
-                    ? `{ day: ${p.close.day}, hour: ${p.close.hour}, minute: ${p.close.minute} }`
-                    : 'null'
-                return `            { open: { day: ${p.open.day}, hour: ${p.open.hour}, minute: ${p.open.minute} }, close: ${close} },`
-            }).join('\n')}\n        ]`
-            : 'null'
-
-        const infoStr = s.info ? `{
-            prix: ${s.info.prix},
-            place: ${s.info.place},
-            pc: ${s.info.pc},
-            matcha: ${s.info.matcha},
-            calme: ${s.info.calme},
-            originalite: ${s.info.originalite},
-        }` : 'null'
-
-        return `    {
-        id: ${s.id},
-        name: '${s.name.replace(/'/g, "\\'")}',
-        address: '${s.address.replace(/'/g, "\\'")}',
-        lat: ${s.lat},
-        lng: ${s.lng},
-        type: '${s.type}',
-        rating: ${s.rating},
-        userRatingCount: ${s.userRatingCount},
-        placeId: '${s.placeId}',
-        tags: [${tagsStr}],
-        description: '${(s.description || '').replace(/'/g, "\\'")}',
-        instagram: '${s.instagram || ''}',
-        tiktok: ${s.tiktok ? JSON.stringify(s.tiktok) : 'null'},
-        info: ${infoStr},
-        hours: ${hoursStr},
-    }`
-    }).join(',\n')
-
-    const output = `// src/data/spots.js\nexport const spots = [\n${lines},\n]\n`
-    fs.writeFileSync('src/data/spots_with_hours.js', output, 'utf8')
-
-    const found = results.filter(r => r.hours).length
-    console.log(`\n✅ Terminé — ${found}/${results.length} spots avec horaires`)
-    console.log('📄 Fichier généré : src/data/spots_with_hours.js')
-    console.log('👉 Vérifie puis renomme en spots.js')
+    console.log(`\n✅ Terminé — ${found}/${spots.length} spots avec horaires mis à jour dans Supabase`)
 }
 
 main()
