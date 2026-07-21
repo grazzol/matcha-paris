@@ -8,6 +8,7 @@ import { useSpots } from '../hooks/useSpots'
 import { toSlug } from '../utils/slugify'
 import { SITE_NAME, SITE_URL, SITE_IMAGE } from '../utils/seo'
 import { isOpenNow, getCloseTime, getWeeklyHours } from '../utils/isOpen'
+import { IconPlace, IconPC, IconMatcha, IconCalme, IconOriginalite, IconLocation, StarRating } from '../components/Icons'
 import 'leaflet/dist/leaflet.css'
 import './SpotPage.css'
 
@@ -78,9 +79,7 @@ export default function SpotPage() {
     if (!spot) {
         return (
             <>
-                <Helmet>
-                    <title>Spot introuvable · {SITE_NAME}</title>
-                </Helmet>
+                <Helmet><title>Spot introuvable · {SITE_NAME}</title></Helmet>
                 <div className="spot-page-error">
                     <h1>Spot introuvable</h1>
                     <button onClick={() => navigate('/map')}>← Retour à la carte</button>
@@ -121,9 +120,7 @@ export default function SpotPage() {
 
             <div className="spot-page">
                 <header className="spot-page-header">
-                    <button className="spot-page-back" onClick={() => navigate('/map')}>
-                        ← Carte
-                    </button>
+                    <button className="spot-page-back" onClick={() => navigate('/map')}>← Carte</button>
                     <span className="spot-page-logo">Matcha <em>Paris</em></span>
                 </header>
 
@@ -132,14 +129,10 @@ export default function SpotPage() {
                         <div className="spot-page-type">{spot.type}</div>
                         <h1 className="spot-page-name">{spot.name}</h1>
                         <p className="spot-page-address">{spot.address}</p>
-
                         {spot.rating && (
                             <div className="spot-page-rating">
-                                <span className="stars">
-                                    {'★'.repeat(Math.round(spot.rating))}
-                                    {'☆'.repeat(5 - Math.round(spot.rating))}
-                                </span>
-                                <span className="rating-value">{spot.rating}</span>
+                                <StarRating rating={spot.rating} />
+                                <span className="rating-value"> {spot.rating}</span>
                                 {spot.userRatingCount && (
                                     <span className="rating-count">({spot.userRatingCount} avis Google)</span>
                                 )}
@@ -155,21 +148,29 @@ export default function SpotPage() {
                                     <span className="spot-page-info-badge">{'€'.repeat(spot.info.prix)}</span>
                                 )}
                                 {spot.info.place !== null && spot.info.place !== undefined && (
-                                    <span className="spot-page-info-badge">{spot.info.place ? '🪑 Spacieux' : '🪑 Petit'}</span>
+                                    <span className="spot-page-info-badge">
+                                        <IconPlace spacieux={spot.info.place} /> {spot.info.place ? 'Spacieux' : 'Petit'}
+                                    </span>
                                 )}
                                 {spot.info.pc !== null && spot.info.pc !== undefined && (
-                                    <span className="spot-page-info-badge">{spot.info.pc ? '💻 PC ok' : '💻 PC non'}</span>
+                                    <span className="spot-page-info-badge">
+                                        <IconPC /> {spot.info.pc ? 'PC ok' : 'PC non'}
+                                    </span>
                                 )}
                                 {spot.info.matcha && (
-                                    <span className="spot-page-info-badge">🍵 {'★'.repeat(spot.info.matcha)}</span>
+                                    <span className="spot-page-info-badge">
+                                        <IconMatcha /> <StarRating rating={spot.info.matcha} />
+                                    </span>
                                 )}
                                 {spot.info.calme && (
                                     <span className="spot-page-info-badge">
-                                        {spot.info.calme >= 4 ? '🤫 Calme' : spot.info.calme >= 2 ? '💬 Moyen' : '🔊 Bruyant'}
+                                        <IconCalme level={spot.info.calme} /> {spot.info.calme >= 4 ? 'Calme' : spot.info.calme >= 2 ? 'Moyen' : 'Bruyant'}
                                     </span>
                                 )}
                                 {spot.info.originalite && (
-                                    <span className="spot-page-info-badge">✨ {'★'.repeat(spot.info.originalite)}</span>
+                                    <span className="spot-page-info-badge">
+                                        <IconOriginalite /> <StarRating rating={spot.info.originalite} />
+                                    </span>
                                 )}
                             </div>
                         </section>
@@ -178,10 +179,7 @@ export default function SpotPage() {
                     {open !== null && (
                         <div className={`spot-open-status ${open ? 'open' : 'closed'}`}>
                             <span className="open-dot" />
-                            {open
-                                ? `Ouvert${closeTime ? ` · ferme à ${closeTime}` : ''}`
-                                : 'Fermé'
-                            }
+                            {open ? `Ouvert${closeTime ? ` · ferme à ${closeTime}` : ''}` : 'Fermé'}
                         </div>
                     )}
 
@@ -245,21 +243,15 @@ export default function SpotPage() {
                     <section className="spot-page-actions">
                         <a
                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ' ' + spot.address)}`}
-                            target="_blank"
-                            rel="noreferrer"
+                            target="_blank" rel="noreferrer"
                             className="spot-page-btn spot-page-btn-maps"
                         >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                                <circle cx="12" cy="9" r="2.5" />
-                            </svg>
-                            Ouvrir dans Maps
+                            <IconLocation /> Ouvrir dans Maps
                         </a>
                         {spot.instagram && (
                             <a
                                 href={`https://instagram.com/${spot.instagram}`}
-                                target="_blank"
-                                rel="noreferrer"
+                                target="_blank" rel="noreferrer"
                                 className="spot-page-btn spot-page-btn-instagram"
                             >
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
