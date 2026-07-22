@@ -1244,3 +1244,33 @@ body,
 .open-now-dot.active {
   background: #2d9e2d;
 }
+
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0px;
+}
+
+.star-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.info-badge .star-img,
+.spot-page-info-badge .star-img {
+  width: 16px;
+  height: 16px;
+}
+
+.spot-page-rating .star-img,
+.spot-detail-rating .star-img {
+  width: 22px;
+  height: 22px;
+}
+
+.spot-rating-badge .star-img {
+  width: 14px;
+  height: 14px;
+}

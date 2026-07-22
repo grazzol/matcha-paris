@@ -66,18 +66,45 @@ export function IconExternalLink() {
     return <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
 }
 
-export function StarRating({ rating, max = 5 }) {
+// Mémorise les variantes choisies pour que ça ne change pas au re-render
+const starCache = new Map()
+
+function getStarVariant(key) {
+    if (!starCache.has(key)) {
+        starCache.set(key, Math.floor(Math.random() * 5) + 1)
+    }
+    return starCache.get(key)
+}
+
+export function StarRating({ rating, max = 5, id = 'default' }) {
     const full = Math.floor(rating)
     const half = rating % 1 >= 0.5 ? 1 : 0
     const empty = max - full - half
+
     return (
         <span className="star-rating">
             {[...Array(full)].map((_, i) => (
-                <FontAwesomeIcon key={`f${i}`} icon={faStar} />
+                <img
+                    key={`f${i}`}
+                    src={`/stars/star-full-${getStarVariant(`${id}-f${i}`)}.png`}
+                    alt="★"
+                    className="star-img"
+                />
             ))}
-            {half === 1 && <FontAwesomeIcon icon={faStarHalfStroke} />}
+            {half === 1 && (
+                <img
+                    src={`/stars/star-half-${getStarVariant(`${id}-h`)}.png`}
+                    alt="½"
+                    className="star-img"
+                />
+            )}
             {[...Array(empty)].map((_, i) => (
-                <FontAwesomeIcon key={`e${i}`} icon={faStarEmpty} />
+                <img
+                    key={`e${i}`}
+                    src={`/stars/star-empty-${getStarVariant(`${id}-e${i}`)}.png`}
+                    alt="☆"
+                    className="star-img"
+                />
             ))}
         </span>
     )
