@@ -89,7 +89,7 @@ const matchaIcon = (name, rating, isFav) => L.divIcon({
                 <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;color:#1a2e1e;">${name}</span>
                 ${rating ? `
                 <span style="width:1px;height:10px;background:rgba(44,74,50,0.2);display:inline-block;"></span>
-                <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#4a7c59;">★ ${rating}</span>` : ''}
+                <img src="/stars/star-full-1.png" style="width:10px;height:10px;object-fit:contain;vertical-align:middle;" alt="★" /><span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#4a7c59;"> ${rating}</span>` : ''}
                 ${isFav ? `<span style="font-size:9px;margin-left:2px;color:#e85d6a;">♥</span>` : ''}
             </div>
         </div>`,
@@ -125,7 +125,7 @@ const matchaIconActive = (name, rating, isFav) => L.divIcon({
                 <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#f5f2ec;">${name}</span>
                 ${rating ? `
                 <span style="width:1px;height:10px;background:rgba(255,255,255,0.2);display:inline-block;"></span>
-                <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#c8dbc2;">★ ${rating}</span>` : ''}
+                <img src="/stars/star-full-1.png" style="width:10px;height:10px;object-fit:contain;vertical-align:middle;" alt="★" /><span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#4a7c59;"> ${rating}</span>` : ''}
                 ${isFav ? `<span style="font-size:9px;color:#ffb3bb;margin-left:2px;">♥</span>` : ''}
             </div>
         </div>`,
@@ -199,7 +199,7 @@ export default function Map({ spots, selected, onSelect, favIds, userPos }) {
                                 <strong>{spot.name}</strong>
                                 <span>
                                     {spot.type}
-                                    {spot.rating ? ` — ★ ${spot.rating}` : ''}
+                                    {spot.rating ? <> — <img src="/stars/star-full-1.png" style={{ width: '12px', height: '12px', verticalAlign: 'middle' }} alt="★" /> {spot.rating}</> : ''}
                                     {spot.userRatingCount ? ` (${spot.userRatingCount} avis)` : ''}
                                 </span>
                                 <small>{spot.address}</small>
